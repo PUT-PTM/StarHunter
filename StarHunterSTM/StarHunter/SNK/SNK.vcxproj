@@ -74,11 +74,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyException.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="STMInputManager.cpp" />
     <ClCompile Include="TiledSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllegroManager.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="hid.h" />
     <ClInclude Include="MyException.h" />
     <ClInclude Include="Sprite.h" />

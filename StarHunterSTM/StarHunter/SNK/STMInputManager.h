@@ -1,6 +1,10 @@
 #pragma once
 
 #include <list>
+#include <thread>
+#include "hid.h"
+#include "MyException.h"
+#include "math.h"
 
 class STMInputManager{
 public:
@@ -11,13 +15,25 @@ public:
 		STM_RIGHT,
 		STM_NONE
 	};
-	void registerSTMInput();
-	bool isKeyDown(STMInputEvent ev);
-	STMInputEvent lastKeyDown();
-private:
+	STMInputManager();
 
-	bool up, down, left, right;
+	bool connect();
+	void registerSTMInput();
+	void stopRegisteringSTMInput();
+	//bool isKeyDown(STMInputEvent ev);
+	STMInputEvent getLastEvent();
+private:
+	bool connected, registering, bufferDirty;
+	bool up, left;
+	STMInputEvent lastEvent;
+	char buffer_in[64];
+
+	std::thread* loop; 
 	std::list<STMInputEvent> eventsList;
+
+	void clearBuffer();
+	void loopMethod();
+	void getEventFromRaw();
 };
 
 

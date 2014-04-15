@@ -31,10 +31,14 @@ void Sprite::setScale(float sc){
 }
 
 float Sprite::getPositionX(){
+	if(positionX > 810) positionX = -10;
+	else if(positionX < -10) positionX = 810;
 	return positionX;
 }
 
 float Sprite::getPositionY(){
+	if(positionY >610) positionY = -10;
+	else if(positionY < -10) positionY = 610;
 	return positionY;
 }
 

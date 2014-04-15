@@ -1,8 +1,9 @@
+#include <iostream>
 #include "AllegroManager.h"
 #include "Display.h"
 #include "TiledSprite.h"
 #include "hid.h"
-#include <iostream>
+#include "STMInputManager.h"
 
 
 
@@ -19,37 +20,18 @@ void iterate(int &i, int max){
 		i = 0;
 }
 
-/// coœ dodane
-
-char buffer_in[64];
-int move = 1;
-int T[2];
-//
-
-
-
-
-int kat = 15;  // wartosc k¹ta nachylenia
-
-
 int main(){
 	AllegroManager::initializeAllegro();
 	Display display(800, 600);
+	STMInputManager stmInputManager;
 	bool end = false;
 
-	/////
-	for (int i=0;i<64;i++) {
-		//buffer_out[i]=0;	
-		buffer_in[i]=0;
-	}
-	////
-	FindTheHID();
 
 	ALLEGRO_TIMER *timer = al_create_timer(1.0 / 60);
 	ALLEGRO_TIMER *animationTimer = al_create_timer(1.0 / 5);
-    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
+	ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
 	al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_timer_event_source(timer));
+	al_register_event_source(queue, al_get_timer_event_source(timer));
 	al_register_event_source(queue, al_get_timer_event_source(animationTimer));
 
 	TiledSprite player("assets/gfx/playerSheet.png", 3, 4);
@@ -60,75 +42,46 @@ int main(){
 	float speed = 5.0f;
 	int animationRegionCounter = 0;
 
+	stmInputManager.connect();
+	stmInputManager.registerSTMInput();
+	STMInputManager::STMInputEvent ev = stmInputManager.getLastEvent();
+
 	bool draw = true;
 	al_start_timer(timer);
 	al_start_timer(animationTimer);
 	while(!end){
 		float x = 0, y = 0;
-		//dodane, wczytanie wartoœci z STM
-		ReadInputReport(buffer_in);
-		//dodane  zmiana wartoœci na mo¿liwoœæ poruszania sie
-		
-	T[0] = (int)buffer_in[1];
-	T[1] = (int)buffer_in[2];
-		///dodane
-		if (T[0] < -kat)  move = 0;
-		if (T[0] >  kat)  move = 1;
-		if (T[1] < -kat)  move = 2;
-		if (T[1] >  kat)  move = 3;;
-		//
 
 
 		ALLEGRO_EVENT event;        
-        al_wait_for_event(queue, &event);
-		 
-		//if(event.type == ALLEGRO_EVENT_KEY_DOWN)
-		{
+		al_wait_for_event(queue, &event);
 
-		//dodane
-				switch (move)
-		{
-		case 0:
-		newDir = UP;
-		break;
-		case 1:
-		newDir = DOWN	;
-		break;
-		case 2:
-		newDir = LEFT;
-		break;
-		case 3:
-		newDir = RIGHT;	
-		break;
-		}		
-				//dodane
-				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)	
-					end = true;
-
-			/*switch(event.keyboard.keycode)   
-			{                                    
-			case ALLEGRO_KEY_DOWN:           
-				newDir = DOWN;
-				break;
-			case ALLEGRO_KEY_UP:
-				newDir = UP;
-				break;
-			case ALLEGRO_KEY_LEFT:
-				newDir = LEFT;
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				newDir = RIGHT;
-				break;
-			case ALLEGRO_KEY_ESCAPE:
+		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
+		{	
+			if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)	
 				end = true;
-				break;
-			}*/
-
-			if(dir != newDir){
-				animationRegionCounter = 1;
-				dir = newDir;
-			}
 		};
+
+		STMInputManager::STMInputEvent ev = stmInputManager.getLastEvent();
+		switch (ev)
+		{
+		case STMInputManager::STMInputEvent::STM_UP:
+			newDir = UP;
+			break;
+		case STMInputManager::STMInputEvent::STM_DOWN:
+			newDir = DOWN;
+			break;
+		case STMInputManager::STMInputEvent::STM_LEFT:
+			newDir = LEFT;
+			break;
+		case STMInputManager::STMInputEvent::STM_RIGHT:
+			newDir = RIGHT;	
+			break;
+		}
+		if(dir != newDir){
+			animationRegionCounter = 1;
+			dir = newDir;
+		}
 
 
 		if(event.type == ALLEGRO_EVENT_TIMER)
@@ -168,5 +121,6 @@ int main(){
 		}
 	}
 
+	stmInputManager.stopRegisteringSTMInput();
 	return 0;
 }
