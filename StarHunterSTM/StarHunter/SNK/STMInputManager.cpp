@@ -1,12 +1,17 @@
 #include "STMInputManager.h"
 
 STMInputManager::STMInputManager(){
+	initializeParameters();
+	clearBuffer();
+}
+
+void STMInputManager::initializeParameters(){
 	registering = connected = left = up  = false;
 	bufferDirty = true;
+	lastCallTime = 0;
+	intervalInMiliseconds = 100;
+	loop = nullptr;
 	lastEvent = STMInputEvent::STM_NONE;
-	loop = 0;
-
-	clearBuffer();
 }
 
 void STMInputManager::clearBuffer(){
@@ -50,20 +55,28 @@ void STMInputManager::loopMethod(){
 	}
 }
 
+void STMInputManager::collectRawInput(){
+
+}
+
 void STMInputManager::getEventFromRaw(){
+	float v = buffer_in[2];
+	v -= 5.0f;
+
 	if((int)buffer_in[1] > 0)
 		left = true;
 	else
 		left = false;
 
-	if((int)buffer_in[2] < 0)
+	if(v < 0)
 		up = true;
 	else
 		up = false;
 
-	double valueY = abs(buffer_in[2]) * 1.3f;
+	double valueY = abs(v) * 1.10f;
 	double valueX = abs(buffer_in[1]);
-	if(abs(valueX - valueY) > 10){
+
+	if(valueY > 12.0f || valueX > 12.0f){
 		if(abs(valueY) > valueX){
 			if(up)
 				lastEvent = STMInputEvent::STM_UP;

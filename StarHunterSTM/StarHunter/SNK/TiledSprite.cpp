@@ -20,30 +20,24 @@ void TiledSprite::countRegionSize(){
 }
 
 void TiledSprite::drawRegion(int row, int column){
+	float x = getRegionWidth();
+	float y = getRegionHeight();
 	al_draw_bitmap_region(
 		bitmap,
-		column * getWidth(),
-		row * getHeight(),
-		getWidth(),
-		getHeight(),
+		column * getRegionWidth(),
+		row * getRegionHeight(),
+		getRegionWidth(),
+		getRegionHeight(),
 		positionX,
 		positionY,
 		0);
 }
 
-float TiledSprite::getTextureWidth(){
-	return al_get_bitmap_width(bitmap);
-}
-
-float TiledSprite::getTextureHeight(){
-	return al_get_bitmap_width(bitmap);
-}
-
-float TiledSprite::getWidth(){
+float TiledSprite::getRegionWidth(){
 	return regionWidth;
 }
 
-float TiledSprite::getHeight(){
+float TiledSprite::getRegionHeight(){
 	return regionHeight;
 }
 

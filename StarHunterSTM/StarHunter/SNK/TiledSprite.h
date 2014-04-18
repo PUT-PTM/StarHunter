@@ -18,10 +18,8 @@ public:
 		);
 
 	void drawRegion(int row, int column);
-	float getTextureWidth();
-	float getTextureHeight();
-	float getWidth();
-	float getHeight();
+	float getRegionWidth();
+	float getRegionHeight();
 	int getColumnsCount();
 	int getRowsCount();
 };

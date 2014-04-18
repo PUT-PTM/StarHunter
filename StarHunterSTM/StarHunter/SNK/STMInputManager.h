@@ -2,9 +2,11 @@
 
 #include <list>
 #include <thread>
+#include <chrono>
+#include "math.h"
 #include "hid.h"
 #include "MyException.h"
-#include "math.h"
+
 
 class STMInputManager{
 public:
@@ -25,14 +27,18 @@ public:
 private:
 	bool connected, registering, bufferDirty;
 	bool up, left;
-	STMInputEvent lastEvent;
 	char buffer_in[64];
+	double averageY, averageX;
+	double lastCallTime, intervalInMiliseconds;
 
+	STMInputEvent lastEvent;
 	std::thread* loop; 
 	std::list<STMInputEvent> eventsList;
 
+	void initializeParameters();
 	void clearBuffer();
 	void loopMethod();
+	void collectRawInput();
 	void getEventFromRaw();
 };
 
