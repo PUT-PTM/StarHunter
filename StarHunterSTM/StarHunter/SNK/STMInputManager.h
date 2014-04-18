@@ -6,6 +6,7 @@
 #include "math.h"
 #include "hid.h"
 #include "MyException.h"
+#include "StopWatch.h"
 
 
 class STMInputManager{
@@ -28,8 +29,12 @@ private:
 	bool connected, registering, bufferDirty;
 	bool up, left;
 	char buffer_in[64];
+
 	double averageY, averageX;
-	double lastCallTime, intervalInMiliseconds;
+	unsigned count;
+
+	std::chrono::milliseconds maxIntervalInMiliseconds;
+	StopWatch watch;
 
 	STMInputEvent lastEvent;
 	std::thread* loop; 
@@ -39,7 +44,7 @@ private:
 	void clearBuffer();
 	void loopMethod();
 	void collectRawInput();
-	void getEventFromRaw();
+	void getEventFromRaw(double rawX, double rawY);
 };
 
 

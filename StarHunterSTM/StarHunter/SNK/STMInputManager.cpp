@@ -8,8 +8,8 @@ STMInputManager::STMInputManager(){
 void STMInputManager::initializeParameters(){
 	registering = connected = left = up  = false;
 	bufferDirty = true;
-	lastCallTime = 0;
-	intervalInMiliseconds = 100;
+	maxIntervalInMiliseconds = std::chrono::milliseconds(100);
+	averageX = averageY = count = 0;
 	loop = nullptr;
 	lastEvent = STMInputEvent::STM_NONE;
 }
@@ -51,33 +51,43 @@ void STMInputManager::loopMethod(){
 	registering = bufferDirty = true;
 	while(registering){
 		ReadInputReport(buffer_in);
-		getEventFromRaw();
+		collectRawInput();
 	}
 }
 
 void STMInputManager::collectRawInput(){
+	count++;
+	averageX += (double)buffer_in[2];
+	averageY += (double)buffer_in[1];
 
+	if(watch.elapsedMs() > maxIntervalInMiliseconds){
+		averageX /= count;
+		averageY /= count;
+		getEventFromRaw(averageX, averageY);
+		count = averageX = averageY = 0;
+
+		watch.restart();
+	}
 }
 
-void STMInputManager::getEventFromRaw(){
-	float v = buffer_in[2];
-	v -= 5.0f;
+void STMInputManager::getEventFromRaw(double rawX, double rawY){
+	rawY -= 4.0;
 
-	if((int)buffer_in[1] > 0)
+	if(rawX < 0)
 		left = true;
 	else
 		left = false;
 
-	if(v < 0)
+	if(rawY < 0)
 		up = true;
 	else
 		up = false;
 
-	double valueY = abs(v) * 1.10f;
-	double valueX = abs(buffer_in[1]);
+	double valueY = abs(rawY);
+	double valueX = abs(rawX);
 
-	if(valueY > 12.0f || valueX > 12.0f){
-		if(abs(valueY) > valueX){
+	if(valueY > 13.0f || valueX > 13.0f){
+		if(valueY > valueX){
 			if(up)
 				lastEvent = STMInputEvent::STM_UP;
 			else

@@ -11,7 +11,8 @@ enum DIR{
 	DOWN = 0,
 	LEFT,
 	RIGHT,
-	UP
+	UP,
+	NONE
 };
 
 void iterate(int &i, int max){
@@ -118,6 +119,7 @@ int main(){
 			display.clear();
 			player.drawRegion(dir, animationRegionCounter);
 			display.flip();
+			draw = false;
 		}
 	}
 
