@@ -14,6 +14,7 @@ public:
 	void flip();
 	void clear();
 	void clearToColor(ALLEGRO_COLOR color);
+	ALLEGRO_DISPLAY* getAllegroDisplay();
 	int getWidth();
 	int getHeight();
 };

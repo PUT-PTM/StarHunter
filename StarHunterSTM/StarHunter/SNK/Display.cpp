@@ -24,6 +24,10 @@ void Display::clearToColor(ALLEGRO_COLOR color){
 	al_clear_to_color(color);
 }
 
+ALLEGRO_DISPLAY* Display::getAllegroDisplay(){
+	return display;
+}
+
 int Display::getWidth(){
 	return al_get_display_width(display);
 }

@@ -1,19 +1,10 @@
 #include <iostream>
-#include "AllegroManager.h"
+#include "AllegroInitializer.h"
 #include "Display.h"
 #include "TiledSprite.h"
 #include "hid.h"
-#include "STMInputManager.h"
+#include "InputManager.h"
 
-
-
-enum DIR{
-	DOWN = 0,
-	LEFT,
-	RIGHT,
-	UP,
-	NONE
-};
 
 void iterate(int &i, int max){
 	i++;
@@ -22,30 +13,31 @@ void iterate(int &i, int max){
 }
 
 int main(){
-	AllegroManager::initializeAllegro();
+	typedef InputManager::MoveEventType DIR;
+
+	AllegroInitializer::initialize();
 	Display display(800, 600);
-	STMInputManager stmInputManager;
+	InputManager inputManager(display);
 	bool end = false;
 
 
-	ALLEGRO_TIMER *timer = al_create_timer(1.0 / 60);
+	ALLEGRO_TIMER *timer = al_create_timer(1.0 / 100);
 	ALLEGRO_TIMER *animationTimer = al_create_timer(1.0 / 5);
 	ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-	al_register_event_source(queue, al_get_keyboard_event_source());
 	al_register_event_source(queue, al_get_timer_event_source(timer));
 	al_register_event_source(queue, al_get_timer_event_source(animationTimer));
 
 	TiledSprite player("assets/gfx/playerSheet.png", 3, 4);
 	player.setPosition(display.getWidth() / 2.0f, display.getHeight() / 2.0f);
 
-	DIR dir = UP;
+	DIR dir = DIR::UP;
 	DIR newDir = dir;
-	float speed = 5.0f;
+	float speed = 3.0f;
 	int animationRegionCounter = 0;
 
-	stmInputManager.connect();
-	stmInputManager.registerSTMInput();
-	STMInputManager::STMInputEvent ev = stmInputManager.getLastEvent();
+	inputManager.connectSTM();
+	inputManager.registerSTM();
+	inputManager.registerAllegro();
 
 	bool draw = true;
 	al_start_timer(timer);
@@ -57,28 +49,13 @@ int main(){
 		ALLEGRO_EVENT event;        
 		al_wait_for_event(queue, &event);
 
-		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
-		{	
-			if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)	
-				end = true;
-		};
+		InputManager::InputEvent inputEvent;
+		inputEvent = inputManager.getEvent();
 
-		STMInputManager::STMInputEvent ev = stmInputManager.getLastEvent();
-		switch (ev)
-		{
-		case STMInputManager::STMInputEvent::STM_UP:
-			newDir = UP;
-			break;
-		case STMInputManager::STMInputEvent::STM_DOWN:
-			newDir = DOWN;
-			break;
-		case STMInputManager::STMInputEvent::STM_LEFT:
-			newDir = LEFT;
-			break;
-		case STMInputManager::STMInputEvent::STM_RIGHT:
-			newDir = RIGHT;	
-			break;
-		}
+		if(inputEvent.exitInitialized())
+			end = true;
+
+		newDir = inputEvent.getLastMove();
 		if(dir != newDir){
 			animationRegionCounter = 1;
 			dir = newDir;
@@ -90,20 +67,20 @@ int main(){
 			if(event.timer.source == timer){
 				switch(dir)
 				{
-				case DOWN:
-					newDir = DOWN;
+				case DIR::DOWN:
+					newDir = DIR::DOWN;
 					y += speed;
 					break;
-				case UP:
-					newDir = UP;
+				case DIR::UP:
+					newDir = DIR::UP;
 					y -= speed;
 					break;
-				case LEFT:
-					newDir = LEFT;
+				case DIR::LEFT:
+					newDir = DIR::LEFT;
 					x -= speed;
 					break;
-				case RIGHT:
-					newDir = RIGHT;
+				case DIR::RIGHT:
+					newDir = DIR::RIGHT;
 					x += speed;
 					break;
 				}
@@ -123,6 +100,6 @@ int main(){
 		}
 	}
 
-	stmInputManager.stopRegisteringSTMInput();
+	inputManager.endRegistering();
 	return 0;
 }

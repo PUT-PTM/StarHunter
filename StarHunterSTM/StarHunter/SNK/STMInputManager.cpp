@@ -1,5 +1,5 @@
 #include "STMInputManager.h"
-
+#include <iostream>
 STMInputManager::STMInputManager(){
 	initializeParameters();
 	clearBuffer();
@@ -11,7 +11,7 @@ void STMInputManager::initializeParameters(){
 	maxIntervalInMiliseconds = std::chrono::milliseconds(100);
 	averageX = averageY = count = 0;
 	loop = nullptr;
-	lastEvent = STMInputEvent::STM_NONE;
+	currentEvent = lastEvent = STMInputEvent::STM_NONE;
 }
 
 void STMInputManager::clearBuffer(){
@@ -27,23 +27,29 @@ STMInputManager::STMInputEvent STMInputManager::getLastEvent(){
 	return lastEvent;
 }
 
+STMInputManager::STMInputEvent STMInputManager::getEvent(){
+	return currentEvent;
+}
+
 bool STMInputManager::connect(){
 	connected = FindTheHID();
 	return connected;
 }
 
-void STMInputManager::registerSTMInput(){
+void STMInputManager::registerInput(){
 	if(!connected)
 		throw new MyException("STM is not connected.");
 	if(!registering)
 		loop = new std::thread(&STMInputManager::loopMethod, this);
 }
 
-void STMInputManager::stopRegisteringSTMInput(){
-	registering = false;
-	loop->join();
-	delete loop;
-	loop = 0;
+void STMInputManager::endRegisteringInput(){
+	if(registering){
+		registering = false;
+		loop->join();
+		delete loop;
+		loop = 0;
+	}
 }
 
 void STMInputManager::loopMethod(){
@@ -71,6 +77,7 @@ void STMInputManager::collectRawInput(){
 }
 
 void STMInputManager::getEventFromRaw(double rawX, double rawY){
+
 	rawY -= 4.0;
 
 	if(rawX < 0)
@@ -86,6 +93,8 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 	double valueY = abs(rawY);
 	double valueX = abs(rawX);
 
+	std::cout << valueY << "  "  << valueX << std::endl;
+
 	if(valueY > 13.0f || valueX > 13.0f){
 		if(valueY > valueX){
 			if(up)
@@ -99,7 +108,10 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 			else
 				lastEvent = STMInputEvent::STM_RIGHT;
 		}
+		currentEvent = lastEvent;
 	}
+	else if(valueY < 7.0f && valueX < 7.0f)
+		currentEvent = STMInputEvent::STM_NONE;
 
 }
 

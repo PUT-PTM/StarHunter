@@ -12,7 +12,7 @@
 class STMInputManager{
 public:
 	enum STMInputEvent{
-		STM_UP,
+		STM_UP = 0,
 		STM_DOWN,
 		STM_LEFT,
 		STM_RIGHT,
@@ -21,10 +21,10 @@ public:
 	STMInputManager();
 
 	bool connect();
-	void registerSTMInput();
-	void stopRegisteringSTMInput();
-	//bool isKeyDown(STMInputEvent ev);
+	void registerInput();
+	void endRegisteringInput();
 	STMInputEvent getLastEvent();
+	STMInputEvent getEvent();
 private:
 	bool connected, registering, bufferDirty;
 	bool up, left;
@@ -36,7 +36,7 @@ private:
 	std::chrono::milliseconds maxIntervalInMiliseconds;
 	StopWatch watch;
 
-	STMInputEvent lastEvent;
+	STMInputEvent lastEvent, currentEvent;
 	std::thread* loop; 
 	std::list<STMInputEvent> eventsList;
 
