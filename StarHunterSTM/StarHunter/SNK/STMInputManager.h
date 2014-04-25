@@ -23,7 +23,6 @@ public:
 	bool connect();
 	void registerInput();
 	void endRegisteringInput();
-	STMInputEvent getLastEvent();
 	STMInputEvent getEvent();
 private:
 	bool connected, registering, bufferDirty;
@@ -36,7 +35,7 @@ private:
 	std::chrono::milliseconds maxIntervalInMiliseconds;
 	StopWatch watch;
 
-	STMInputEvent lastEvent, currentEvent;
+	STMInputEvent currentEvent;
 	std::thread* loop; 
 	std::list<STMInputEvent> eventsList;
 

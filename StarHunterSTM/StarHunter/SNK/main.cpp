@@ -35,8 +35,8 @@ int main(){
 	float speed = 3.0f;
 	int animationRegionCounter = 0;
 
-	inputManager.connectSTM();
-	inputManager.registerSTM();
+	//inputManager.connectSTM();
+	//inputManager.registerSTM();
 	inputManager.registerAllegro();
 
 	bool draw = true;

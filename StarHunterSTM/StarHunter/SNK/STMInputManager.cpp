@@ -11,7 +11,7 @@ void STMInputManager::initializeParameters(){
 	maxIntervalInMiliseconds = std::chrono::milliseconds(100);
 	averageX = averageY = count = 0;
 	loop = nullptr;
-	currentEvent = lastEvent = STMInputEvent::STM_NONE;
+	currentEvent = STMInputEvent::STM_NONE;
 }
 
 void STMInputManager::clearBuffer(){
@@ -21,10 +21,6 @@ void STMInputManager::clearBuffer(){
 		for(int i = 0; i < 64; i++)
 			buffer_in[i] = 0;
 	}
-}
-
-STMInputManager::STMInputEvent STMInputManager::getLastEvent(){
-	return lastEvent;
 }
 
 STMInputManager::STMInputEvent STMInputManager::getEvent(){
@@ -98,17 +94,16 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 	if(valueY > 13.0f || valueX > 13.0f){
 		if(valueY > valueX){
 			if(up)
-				lastEvent = STMInputEvent::STM_UP;
+				currentEvent = STMInputEvent::STM_UP;
 			else
-				lastEvent = STMInputEvent::STM_DOWN;
+				currentEvent = STMInputEvent::STM_DOWN;
 		}
 		else{
 			if(left)
-				lastEvent = STMInputEvent::STM_LEFT;
+				currentEvent = STMInputEvent::STM_LEFT;
 			else
-				lastEvent = STMInputEvent::STM_RIGHT;
+				currentEvent = STMInputEvent::STM_RIGHT;
 		}
-		currentEvent = lastEvent;
 	}
 	else if(valueY < 7.0f && valueX < 7.0f)
 		currentEvent = STMInputEvent::STM_NONE;

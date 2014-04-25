@@ -1,6 +1,9 @@
-﻿Build started 2014-04-25 20:22:47.
+﻿Build started 2014-04-25 20:32:27.
      1>Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+       Link:
          F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Debug\StarHunter.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\allegro\lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "allegro-5.0.8-monolith-md-debug.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Debug\StarHunter.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Debug\StarHunter.lib" /MACHINE:X86 Debug\AllegroInputManager.obj
          Debug\Display.obj
          Debug\hid.obj
@@ -16,4 +19,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.30
+Time Elapsed 00:00:01.65
