@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="AllegroInputManager.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="hid.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="AllegroInitializer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="hid.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyException.h" />

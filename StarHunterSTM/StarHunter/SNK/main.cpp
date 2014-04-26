@@ -4,6 +4,7 @@
 #include "TiledSprite.h"
 #include "hid.h"
 #include "InputManager.h"
+#include "GameTimer.h"
 
 
 void iterate(int &i, int max){
@@ -18,14 +19,9 @@ int main(){
 	AllegroInitializer::initialize();
 	Display display(800, 600);
 	InputManager inputManager(display);
+	GameTimer timer;
 	bool end = false;
 
-
-	ALLEGRO_TIMER *timer = al_create_timer(1.0 / 100);
-	ALLEGRO_TIMER *animationTimer = al_create_timer(1.0 / 5);
-	ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-	al_register_event_source(queue, al_get_timer_event_source(timer));
-	al_register_event_source(queue, al_get_timer_event_source(animationTimer));
 
 	TiledSprite player("assets/gfx/playerSheet.png", 3, 4);
 	player.setPosition(display.getWidth() / 2.0f, display.getHeight() / 2.0f);
@@ -39,15 +35,10 @@ int main(){
 	//inputManager.registerSTM();
 	inputManager.registerAllegro();
 
+	timer.start();
 	bool draw = true;
-	al_start_timer(timer);
-	al_start_timer(animationTimer);
 	while(!end){
 		float x = 0, y = 0;
-
-
-		ALLEGRO_EVENT event;        
-		al_wait_for_event(queue, &event);
 
 		InputManager::InputEvent inputEvent;
 		inputEvent = inputManager.getEvent();
@@ -61,10 +52,10 @@ int main(){
 			dir = newDir;
 		}
 
-
-		if(event.type == ALLEGRO_EVENT_TIMER)
+		GameTimer::TimerTickType timerType = timer.getTimerTick();
+		if(timerType != GameTimer::TimerTickType::NONE)
 		{
-			if(event.timer.source == timer){
+			if(timerType == GameTimer::TimerTickType::MAIN){
 				switch(dir)
 				{
 				case DIR::DOWN:
