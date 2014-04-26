@@ -5,7 +5,14 @@ protected:
 	float width, height;
 	float positionX, positionY;
 public:
-	Entity(float pX, float pY, float width, float height);
+	Entity(float pX, float pY, float pWidth, float pHeight);
 
 	bool collidesWith(Entity e);
+	virtual void setPosition(float pX, float pY);
+	float getPositionX();
+	float getPositionY();
+	void setWidth(float pWidth);
+	void setHeight(float pHeight);
+	float getWidth();
+	float getHeight();
 };
