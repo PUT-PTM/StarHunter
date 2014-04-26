@@ -14,12 +14,12 @@ private:
 	Player player;
 
 	bool end, draw;
-	std::thread *drawingThread;
+	std::thread *drawingAndTimersRelatedLogicThread;
 	void setup();
-	void startDrawing();
-	void stopDrawing();
 	void logicLoop();
-	void drawingLoop();
+	void startDrawingAndTimersRelatedLogic();
+	void stopDrawingAndTimersRelatedLogic();
+	void drawingAndTimersRelatedLogicLoop();	
 public:
 	Game();
 	void run();

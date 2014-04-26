@@ -5,7 +5,7 @@ Game::Game() :
 	inputManager(display),
 	player(display.getWidth() / 2.0f, display.getHeight() / 2.0f)
 {
-	drawingThread = nullptr;
+	drawingAndTimersRelatedLogicThread = nullptr;
 	end = false;
 	draw = true;
 
@@ -20,9 +20,11 @@ void Game::setup(){
 
 void Game::run(){
 	timer.start();
-	startDrawing();
+
+	startDrawingAndTimersRelatedLogic();
 	logicLoop();
-	stopDrawing();
+	stopDrawingAndTimersRelatedLogic();
+
 	timer.stop();
 }
 
@@ -35,7 +37,22 @@ void Game::logicLoop(){
 			end = true;
 
 		player.changeDirection(inputEvent.getLastMove());
+	}
+}
 
+void Game::startDrawingAndTimersRelatedLogic(){
+	drawingAndTimersRelatedLogicThread = new std::thread(&Game::drawingAndTimersRelatedLogicLoop, this);
+}
+
+void Game::stopDrawingAndTimersRelatedLogic(){
+	drawingAndTimersRelatedLogicThread->join();
+	delete drawingAndTimersRelatedLogicThread;
+	drawingAndTimersRelatedLogicThread = nullptr;
+}
+
+void Game::drawingAndTimersRelatedLogicLoop(){
+	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
+	while(!end){
 		GameTimer::TimerTickType timerType = timer.getTimerTick();
 		if(timerType != GameTimer::TimerTickType::NONE)
 		{
@@ -48,22 +65,7 @@ void Game::logicLoop(){
 
 			draw = true;
 		}
-	}
-}
 
-void Game::startDrawing(){
-	drawingThread = new std::thread(&Game::drawingLoop, this);
-}
-
-void Game::stopDrawing(){
-	drawingThread->join();
-	delete drawingThread;
-	drawingThread = nullptr;
-}
-
-void Game::drawingLoop(){
-	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
-	while(!end){
 		if(draw){
 			display.clear();
 
