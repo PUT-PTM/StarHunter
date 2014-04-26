@@ -12,16 +12,20 @@
 class AllegroInitializer{
 private:
 	AllegroInitializer();
+	static bool initialized;
 public:
 	// throws MyException
 	static void initialize(){
-		if(!al_init())
-			throw new MyException("Could not Initialize Allegro");
+		if(!initialized){
+			if(!al_init())
+				throw new MyException("Could not Initialize Allegro");
 
-		al_init_image_addon();
-		al_init_primitives_addon();
-		al_install_keyboard();
-		al_install_audio();
-		al_init_acodec_addon();
+			al_init_image_addon();
+			al_init_primitives_addon();
+			al_install_keyboard();
+			al_install_audio();
+			al_init_acodec_addon();
+			initialized = true;
+		}
 	}
 };

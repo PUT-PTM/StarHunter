@@ -19,6 +19,7 @@ public:
 		STM_NONE
 	};
 	STMInputManager();
+	~STMInputManager();
 
 	bool connect();
 	void registerInput();

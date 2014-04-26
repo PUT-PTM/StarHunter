@@ -5,6 +5,10 @@ STMInputManager::STMInputManager(){
 	clearBuffer();
 }
 
+STMInputManager::~STMInputManager(){
+	endRegisteringInput();
+}
+
 void STMInputManager::initializeParameters(){
 	registering = connected = left = up  = false;
 	bufferDirty = true;
