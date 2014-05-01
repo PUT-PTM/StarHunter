@@ -5,6 +5,7 @@
 class Display{
 private:
 	ALLEGRO_DISPLAY *display;
+	int width, height;
 public:
 	//throws MyException
 	Display(int width, int height);

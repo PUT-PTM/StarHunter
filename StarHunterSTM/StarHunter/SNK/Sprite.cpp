@@ -10,9 +10,26 @@ Sprite::Sprite(std::string path, float posX, float posY){
 	this->scaleDirty = false;
 }
 
+Sprite::Sprite(ALLEGRO_BITMAP *bitmap, float posX, float posY){
+	this->bitmap = bitmap;
+	this->positionX = posX;
+	this->positionY = posY;
+	this->scaleDirty = false;
+}
+
+Sprite::Sprite(const Sprite &s){
+	bitmap = al_clone_bitmap(s.bitmap);
+	positionX = s.positionX;
+	positionY = s.positionY;
+	scaleDirty = s.scaleDirty;
+	scale = s.scale;
+}
+
 Sprite::~Sprite(){
-	if(bitmap)
+	if(bitmap){
 		al_destroy_bitmap(bitmap);
+		bitmap = 0;
+	}
 }
 
 void Sprite::setPosition(float posX, float posY){
@@ -31,14 +48,10 @@ void Sprite::setScale(float sc){
 }
 
 float Sprite::getPositionX(){
-	if(positionX > 810) positionX = -10;
-	else if(positionX < -10) positionX = 810;
 	return positionX;
 }
 
 float Sprite::getPositionY(){
-	if(positionY >610) positionY = -10;
-	else if(positionY < -10) positionY = 610;
 	return positionY;
 }
 
@@ -55,20 +68,26 @@ void Sprite::draw(){
 	if(!scaleDirty){
 		al_draw_bitmap(
 		bitmap,
-		positionX, positionY,
+		positionX - getWidth() / 2.0f, positionY - getHeight() / 2.0f,
 		0);
 	}
 	else{
+		float scaledWidth = getWidth() * scale;
+		float scaleHeight = getHeight() * scale;
 		al_draw_scaled_bitmap(
 		bitmap,
 		0, 0,
 		getWidth(), getHeight(),
-		positionX, positionY,
-		getWidth() * scale, getHeight() * scale, 
+		positionX - scaledWidth /2.0f, positionY - scaleHeight / 2.0f,
+		scaledWidth, scaleHeight, 
 		0);
 	}
 }
 
 bool Sprite::collidesWith(Sprite s){
 	return false;
+}
+
+ALLEGRO_BITMAP* Sprite::getAllegroBitmap(){
+	return bitmap;
 }

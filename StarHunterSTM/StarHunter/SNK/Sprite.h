@@ -16,6 +16,8 @@ protected:
 public:
 	// throws MyException
 	Sprite(std::string texturePath, float positionX = 0, float positionY = 0);
+	Sprite(ALLEGRO_BITMAP* bitmap, float positionX = 0, float positionY = 0);
+	Sprite(const Sprite& s);
 
 	~Sprite();
 
@@ -26,5 +28,6 @@ public:
 	void setScale(float scale);
 	float getWidth();
 	float getHeight();
+	ALLEGRO_BITMAP* getAllegroBitmap();
 	virtual bool collidesWith(Sprite);
 };

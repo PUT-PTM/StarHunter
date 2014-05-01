@@ -9,12 +9,14 @@ private:
 	InputManager::MoveEventType direction;
 	const int startingRegionY;
 	const int startingRegionX;
+	float displayWidth, displayHeight;
 	int regionNumberX, regionNumberY;
 	float distance;
 	bool animation;
 
+	void keepInBounds();
 public:
-	Player(float pX, float pY);
+	Player(float pX, float pY, float displayWidth, float displayHeight);
 
 	void move();
 	void move(float pDistanceX, float pDistanceY);

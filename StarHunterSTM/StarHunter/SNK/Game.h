@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "GameTimer.h"
+#include "SpaceBackground.h"
 
 class Game{
 private:
@@ -12,6 +13,7 @@ private:
 	InputManager inputManager;
 	GameTimer timer;
 	Player player;
+	SpaceBackground background;
 
 	bool end, draw;
 	std::thread *drawingAndTimersRelatedLogicThread;

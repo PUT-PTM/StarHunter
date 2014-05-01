@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(float pX, float pY) :
+Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	Entity(pX, pY, 0, 0),
 	tiledSprite("assets/gfx/playerSheet.png", 3, 4),
 	startingRegionX(0),
@@ -8,8 +8,10 @@ Player::Player(float pX, float pY) :
 {
 	this->setWidth(tiledSprite.getRegionWidth());
 	this->setHeight(tiledSprite.getRegionHeight());
-
-	distance = 3.0f;
+	
+	this->displayWidth = displayWidth;
+	this->displayHeight = displayHeight;
+	distance = 2.5f;
 	animation = false;
 	direction = InputManager::MoveEventType::NONE;
 	regionNumberX = startingRegionX;
@@ -39,6 +41,27 @@ void Player::move(float pDistanceX, float pDistanceY){
 		this->getPositionX() + pDistanceX,
 		this->getPositionY() + pDistanceY
 		);
+
+	keepInBounds();
+}
+
+void Player::keepInBounds(){
+	if(this->getPositionX() < 0 - this->getWidth() / 2.0f)
+		this->setPosition(
+		displayWidth,
+		this->getPositionY());
+	else if(this->getPositionX() > displayWidth + this->getWidth() / 2.0f)
+		this->setPosition(
+		0,
+		this->getPositionY());
+	else if(this->getPositionY() < 0 - this->getHeight() / 2.0f)
+		this->setPosition(
+		this->getPositionX(),
+		displayHeight);
+	else if(this->getPositionY() > displayHeight + this->getHeight() / 2.0f)
+		this->setPosition(
+		this->getPositionX(),
+		0);
 }
 
 void Player::setSpeed(float pDistance){

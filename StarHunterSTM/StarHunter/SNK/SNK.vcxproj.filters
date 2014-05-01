@@ -78,6 +78,9 @@
     <ClCompile Include="STMInputManager.cpp">
       <Filter>Source Files\STM</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceBackground.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StopWatch.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="STMInputManager.h">
       <Filter>Header Files\STM</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceBackground.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

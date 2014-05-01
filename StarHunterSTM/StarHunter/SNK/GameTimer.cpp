@@ -2,7 +2,7 @@
 
 GameTimer::GameTimer(){
 	mainTimer = al_create_timer(1.0 / 100);
-	animationTimer = al_create_timer(1.0 / 6);
+	animationTimer = al_create_timer(1.0 / 8);
 	queue = al_create_event_queue();
 	al_register_event_source(queue, al_get_timer_event_source(mainTimer));
 	al_register_event_source(queue, al_get_timer_event_source(animationTimer));

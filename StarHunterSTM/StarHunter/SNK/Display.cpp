@@ -5,6 +5,9 @@ Display::Display(int width, int height){
  
     if(!display)
 		throw new MyException("Could not create Allegro Display");
+	this->width = width;
+	this->height = height;
+	clear();
 }
 
 Display::~Display(){
@@ -29,9 +32,9 @@ ALLEGRO_DISPLAY* Display::getAllegroDisplay(){
 }
 
 int Display::getWidth(){
-	return al_get_display_width(display);
+	return width;
 }
 
 int Display::getHeight(){
-	return al_get_display_height(display);
+	return height;
 }

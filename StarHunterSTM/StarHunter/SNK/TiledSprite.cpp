@@ -28,8 +28,8 @@ void TiledSprite::drawRegion(int row, int column){
 		row * getRegionHeight(),
 		getRegionWidth(),
 		getRegionHeight(),
-		positionX,
-		positionY,
+		positionX - getRegionWidth() / 2.0f,
+		positionY - getRegionHeight() / 2.0f,
 		0);
 }
 

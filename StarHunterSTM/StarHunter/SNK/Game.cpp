@@ -3,7 +3,10 @@
 Game::Game() :
 	display(800, 600),
 	inputManager(display),
-	player(display.getWidth() / 2.0f, display.getHeight() / 2.0f)
+	player(
+		display.getWidth() / 2.0f, display.getHeight() / 2.0f,
+		display.getWidth(), display.getHeight()),
+		background(&display)
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
 	end = false;
@@ -37,6 +40,7 @@ void Game::logicLoop(){
 			end = true;
 
 		player.changeDirection(inputEvent.getLastMove());
+		background.changeDirection(inputEvent.getLastMove());
 	}
 }
 
@@ -57,6 +61,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 		if(timerType != GameTimer::TimerTickType::NONE)
 		{
 			if(timerType == GameTimer::TimerTickType::MAIN){		// Main timer
+				background.move();
 				player.move();
 			}
 			else{													// Animation timer
@@ -69,6 +74,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 		if(draw){
 			display.clear();
 
+			background.draw();
 			player.draw();
 
 			display.flip();
