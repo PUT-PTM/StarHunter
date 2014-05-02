@@ -6,8 +6,8 @@ Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	startingRegionX(0),
 	startingRegionY(1)
 {
-	this->setWidth(tiledSprite.getRegionWidth());
-	this->setHeight(tiledSprite.getRegionHeight());
+	this->setWidth(50); // Real player width
+	this->setHeight(60); // Real player height
 	
 	this->displayWidth = displayWidth;
 	this->displayHeight = displayHeight;
