@@ -81,6 +81,12 @@
     <ClCompile Include="SpaceBackground.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StopWatch.h">
@@ -126,6 +132,12 @@
       <Filter>Header Files\STM</Filter>
     </ClInclude>
     <ClInclude Include="SpaceBackground.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

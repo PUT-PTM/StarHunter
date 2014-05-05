@@ -3,7 +3,7 @@
 #include "TiledSprite.h"
 #include "InputManager.h"
 
-class Player : Entity{
+class Player : public Entity{
 private:
 	TiledSprite tiledSprite;
 	InputManager::MoveEventType direction;

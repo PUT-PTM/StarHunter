@@ -6,7 +6,8 @@ Game::Game() :
 	player(
 		display.getWidth() / 2.0f, display.getHeight() / 2.0f,
 		display.getWidth(), display.getHeight()),
-		background(&display)
+		background(&display),
+		star(50, 50)
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
 	end = false;
@@ -63,10 +64,20 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 			if(timerType == GameTimer::TimerTickType::MAIN){		// Main timer
 				background.move();
 				player.move();
+
+				if(player.collidesWith(star) == false)
+			{
+				star.generateNewPosition(player);
+				sound.soundEff();
+			};
 			}
 			else{													// Animation timer
 				player.animate();
 			}
+
+
+			
+
 
 			draw = true;
 		}
@@ -75,8 +86,9 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 			display.clear();
 
 			background.draw();
+			star.draw();
 			player.draw();
-
+			
 			display.flip();
 			draw = false;
 		}

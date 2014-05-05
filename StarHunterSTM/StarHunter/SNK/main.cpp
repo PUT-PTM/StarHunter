@@ -2,8 +2,10 @@
 #include "Game.h"
 #include <iostream>
 
+
 int main(){
 	AllegroInitializer::initialize();
+	
 
 	try{
 		AllegroInitializer::initialize();
@@ -17,4 +19,4 @@ int main(){
 	}	
 
 	return 0;
-}
+};

@@ -80,8 +80,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyException.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpaceBackground.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Star.cpp" />
     <ClCompile Include="STMInputManager.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="TiledSprite.cpp" />
@@ -97,8 +99,10 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyException.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="SpaceBackground.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Star.h" />
     <ClInclude Include="STMInputManager.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="TiledSprite.h" />
