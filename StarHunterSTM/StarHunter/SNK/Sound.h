@@ -10,11 +10,10 @@ protected:
 	ALLEGRO_SAMPLE *song;
 	ALLEGRO_SAMPLE_INSTANCE *songInstance;
 public:
-
-	void soundEff();
-	void music();
-	Sound();
 	~Sound();
-
+	void loadSamples();
+	void prepare();
+	void playStarSoundEffect();
+	void playBackgroundMusic();
 };
  

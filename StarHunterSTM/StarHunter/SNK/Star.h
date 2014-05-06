@@ -1,30 +1,22 @@
 #pragma once
-#include "Entity.h"
-#include "TiledSprite.h"
-#include "Player.h"
-#include <time.h>
-#include <allegro5\\allegro_image.h>
 #include <iostream>
+#include <time.h>
 
+#include "Display.h"
+#include "Entity.h"
+#include "Sprite.h"
 
 class Star : public Entity{
-
-	//generateNewPosition(Entity player);*/
-
-protected:
-	
-		ALLEGRO_BITMAP* starmap;
-		
-		float heightStar();
-		float widthStar();
+protected:	
+	Sprite sprite;
+	int usableWidth, usableHeight;
+	float emptySpaceScale, emptySpaceWidth, emptySpaceHeight;
+	void generateNewPosition();
+	bool validateNewPosition(Entity e);
 public:
-	Star(float Px, float Py);
-	void generateNewPosition(Entity e);
-	//bool collidesWith(Entity e);
+	Star(float pX, float pY, float displayWidth, float displayHeight);
+	void generateNewPositionBasedOnPlayerPosition(Entity player);
+	void setPosition(float pX, float pY);
 	void draw();
-	~Star();
-	void write(Entity e);
-
-
 };
 

@@ -7,16 +7,30 @@ Game::Game() :
 		display.getWidth() / 2.0f, display.getHeight() / 2.0f,
 		display.getWidth(), display.getHeight()),
 		background(&display),
-		star(50, 50)
+		star(50, 50, display.getWidth(), display.getHeight())
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
 	end = false;
 	draw = true;
-
-	setup();
+	score = 0;
+	star.generateNewPositionBasedOnPlayerPosition(player);
+	
+	startInitializingSound();
+	setupInput();
 }
 
-void Game::setup(){
+void Game::startInitializingSound(){
+	std::thread *t = new std::thread(&Game::initializeSound, this);
+}
+
+void Game::initializeSound(){
+	sound.loadSamples();
+	sound.prepare();
+	sound.playBackgroundMusic();
+}
+
+void Game::setupInput(){
+
 	//inputManager.connectSTM();
 	//inputManager.registerSTM();
 	inputManager.registerAllegro();
@@ -32,6 +46,16 @@ void Game::run(){
 	timer.stop();
 }
 
+void Game::startDrawingAndTimersRelatedLogic(){
+	drawingAndTimersRelatedLogicThread = new std::thread(&Game::drawingAndTimersRelatedLogicLoop, this);
+}
+
+void Game::stopDrawingAndTimersRelatedLogic(){
+	drawingAndTimersRelatedLogicThread->join();
+	delete drawingAndTimersRelatedLogicThread;
+	drawingAndTimersRelatedLogicThread = nullptr;
+}
+
 void Game::logicLoop(){
 		while(!end){
 		InputManager::InputEvent inputEvent;
@@ -42,17 +66,21 @@ void Game::logicLoop(){
 
 		player.changeDirection(inputEvent.getLastMove());
 		background.changeDirection(inputEvent.getLastMove());
+
+		if(player.collidesWith(star))
+		{
+			
+			sound.playStarSoundEffect();
+			score++;
+			std::cout << "Score: " <<  score << std::endl;
+			std::cout << al_get_time() << std::endl;
+			std::cout << "Player position: " << player.getPositionX() << " | " << player.getPositionY() << std::endl;
+			std::cout << "Star old position: " << star.getPositionX() << " | " << star.getPositionY() << std::endl;	
+			star.generateNewPositionBasedOnPlayerPosition(player);
+			std::cout << "Star new position: " << star.getPositionX() << " | " << star.getPositionY() << std::endl;			
+			std::cout << std::endl;
+		};
 	}
-}
-
-void Game::startDrawingAndTimersRelatedLogic(){
-	drawingAndTimersRelatedLogicThread = new std::thread(&Game::drawingAndTimersRelatedLogicLoop, this);
-}
-
-void Game::stopDrawingAndTimersRelatedLogic(){
-	drawingAndTimersRelatedLogicThread->join();
-	delete drawingAndTimersRelatedLogicThread;
-	drawingAndTimersRelatedLogicThread = nullptr;
 }
 
 void Game::drawingAndTimersRelatedLogicLoop(){
@@ -65,21 +93,11 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 				background.move();
 				player.move();
 
-				if(player.collidesWith(star) == false)
-			{
-				star.generateNewPosition(player);
-				sound.soundEff();
-			};
+				draw = true;
 			}
 			else{													// Animation timer
 				player.animate();
-			}
-
-
-			
-
-
-			draw = true;
+			}		
 		}
 
 		if(draw){

@@ -1,5 +1,6 @@
 #pragma once
 #include <thread>
+#include <iostream>
 #include "hid.h"
 #include "Display.h"
 #include "Player.h"
@@ -20,13 +21,19 @@ private:
 	Star star;
 	Sound sound;
 
+	float oldPosX, oldPosY;
+
 	bool end, draw;
+	int score;
 	std::thread *drawingAndTimersRelatedLogicThread;
-	void setup();
+
+	void initializeSound();
+	void startInitializingSound();
+	void setupInput();
 	void logicLoop();
 	void startDrawingAndTimersRelatedLogic();
 	void stopDrawingAndTimersRelatedLogic();
-	void drawingAndTimersRelatedLogicLoop();	
+	void drawingAndTimersRelatedLogicLoop();
 public:
 	Game();
 	void run();

@@ -5,22 +5,17 @@ Entity::Entity(float pX, float pY, float pWidth, float pHeight){
 	positionY = pY;
 	width = pWidth;
 	height = pHeight;
+	oldPosX = oldPosY = 0;
 }
 
 bool Entity::collidesWith(Entity e){
-	if(e.getPositionX() + this->getWidth() < this->getPositionX() ||
-		e.getPositionX() > this->getPositionX() + this->getWidth() ||
-		e.getPositionY() + this->getHeight() < this->getPositionY() ||
-		e.getPositionY() > this->getPositionY() + this->getHeight() )
-			return true;
-	 return false;
+	if(this->getPositionX() + this->getWidth() / 2.0f > e.getPositionX() - e.getWidth() / 2.0f &&
+		this->getPositionX() - this->getWidth() / 2.0f < e.getPositionX() + e.getWidth() / 2.0f &&
+		this->getPositionY() - this->getHeight() / 2.0f < e.getPositionY() + e.getHeight() / 2.0f &&
+		this->getPositionY() + this->getHeight() / 2.0f > e.getPositionY() - e.getHeight() / 2.0f)
+		return true;
+	return false;
 }
-/*
-this->getPositionX() + this->getWidth() / 2.0f > e.getPositionX() - e.getWidth() / 2.0f ||
-		this->getPositionX() - this->getWidth() / 2.0f < e.getPositionX() + e.getWidth() / 2.0f ||
-		  this->getPositionY() - this->getHeight() / 2.0f < e.getPositionY() + e.getHeight() / 2.0f ||
-			this->getPositionY() + this->getHeight() / 2.0f > e.getPositionY() - e.getHeight() / 2.0f)*/
-
 
 void Entity::setPosition(float pX, float pY){
 	positionX = pX;

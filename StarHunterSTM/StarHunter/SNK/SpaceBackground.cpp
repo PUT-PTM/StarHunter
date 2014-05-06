@@ -13,53 +13,11 @@ SpaceBackground::~SpaceBackground(){
 }
 
 void SpaceBackground::initializeTile(){
-	tileBitmap = al_create_bitmap(display->getWidth(), display->getHeight());
+	tileBitmap = al_load_bitmap("assets/gfx/background.png");
+	if(!tileBitmap)
+		throw MyException("Could not load background bitmap.");
 
-	drawStars();
 	setupPositions();
-}
-
-void SpaceBackground::drawStars(){
-	ALLEGRO_BITMAP* star = al_load_bitmap("assets/gfx/backgroundStar.png");
-	if(!star)
-		throw new MyException("Could not load 'backgroundStar.png'");
-	float starWidth = al_get_bitmap_width(star);
-	float starHeight = al_get_bitmap_height(star);
-
-
-	srand(time(NULL));
-	int seedSize = (rand() % 100) + 200;
-	al_set_target_bitmap(tileBitmap);
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	for(int i = 0; i < seedSize; i++){
-		float scale = randScale();
-		float scaledWidth = starWidth * scale;
-		float scaledHeight = starHeight * scale;
-		int posX = (rand() % (int)(display->getWidth() - scaledWidth)) + scaledWidth / 2.0f;
-		int posY = (rand() % (int)(display->getHeight() - scaledHeight)) + scaledHeight / 2.0f;
-
-		al_draw_scaled_bitmap(
-			star,
-			0, 0,
-			starWidth, starHeight,
-			posX - scaledWidth / 2.0f,
-			posY - scaledHeight / 2.0f,
-			scaledWidth, scaledHeight,
-			0);
-	}
-	al_set_target_backbuffer(display->getAllegroDisplay());
-	al_destroy_bitmap(star);	
-}
-
-float SpaceBackground::randScale(){
-	int i = rand() % 100;
-	if(i < 85){
-		return 0.2f;
-	}
-	else if(i < 95)
-		return i / 300.0f;
-	else
-		return i / 250.0f;
 }
 
 void SpaceBackground::setupPositions(){

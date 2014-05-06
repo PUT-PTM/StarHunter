@@ -21,8 +21,6 @@ private:
 	void initializeTile();
 	void setupPositions();
 	std::pair<float, float> &getCenterPosition();
-	void drawStars();
-	float randScale();
 	void moveTiles(float distanceX, float distanceY);
 	void keepInBounds();
 public:

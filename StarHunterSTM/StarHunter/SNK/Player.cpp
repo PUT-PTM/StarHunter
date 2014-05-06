@@ -64,7 +64,7 @@ void Player::keepInBounds(){
 		0);
 }
 
-void Player::setSpeed(float pDistance){
+void Player::setDistancePerFrame(float pDistance){
 	distance = pDistance;
 }
 

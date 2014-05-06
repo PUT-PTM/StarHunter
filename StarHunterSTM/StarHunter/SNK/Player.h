@@ -21,7 +21,7 @@ public:
 	void move();
 	void move(float pDistanceX, float pDistanceY);
 	void changeDirection(InputManager::MoveEventType newDirection);
-	void setSpeed(float pDistance);
+	void setDistancePerFrame(float pDistance);
 	void setPosition(float pDistanceX, float pDistanceY);
 	void animate();
 	void draw();

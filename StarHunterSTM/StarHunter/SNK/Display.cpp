@@ -8,6 +8,7 @@ Display::Display(int width, int height){
 	this->width = width;
 	this->height = height;
 	clear();
+	flip();
 }
 
 Display::~Display(){

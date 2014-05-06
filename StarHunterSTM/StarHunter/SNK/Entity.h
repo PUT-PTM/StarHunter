@@ -4,6 +4,8 @@ class Entity{
 protected:
 	float width, height;
 	float positionX, positionY;
+
+	float oldPosX, oldPosY;
 public:
 	Entity(float pX, float pY, float pWidth, float pHeight);
 
