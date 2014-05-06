@@ -80,6 +80,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyException.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourcesManager.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpaceBackground.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyException.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SpaceBackground.h" />
     <ClInclude Include="Sprite.h" />

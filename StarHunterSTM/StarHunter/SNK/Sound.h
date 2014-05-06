@@ -5,13 +5,14 @@
 class Sound
 {
 protected:
-
-	ALLEGRO_SAMPLE *soundEffect;
-	ALLEGRO_SAMPLE *song;
+	ALLEGRO_SAMPLE *starSoundsEffect;
+	ALLEGRO_SAMPLE *backgroundSong;
 	ALLEGRO_SAMPLE_INSTANCE *songInstance;
+	bool soundsLoaded, soundsPrepared;
 public:
+	Sound();
 	~Sound();
-	void loadSamples();
+	void attachSamples(ALLEGRO_SAMPLE *backgroundSong, ALLEGRO_SAMPLE *starSoundEffect);
 	void prepare();
 	void playStarSoundEffect();
 	void playBackgroundMusic();

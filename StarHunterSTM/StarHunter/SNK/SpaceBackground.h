@@ -18,7 +18,6 @@ private:
 	float displayWidth, displayHeight;
 	float speed;
 
-	void initializeTile();
 	void setupPositions();
 	std::pair<float, float> &getCenterPosition();
 	void moveTiles(float distanceX, float distanceY);
@@ -30,4 +29,5 @@ public:
 	void draw();
 	void move();
 	void changeDirection(InputManager::MoveEventType newDirection);
+	void attachBitmap(ALLEGRO_BITMAP* backgroundBitmap);
 };

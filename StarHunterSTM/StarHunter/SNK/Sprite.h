@@ -12,14 +12,9 @@ protected:
 	float positionX, positionY, scale;
 	bool scaleDirty;
 
-	void loadBitmap();
 public:
-	// throws MyException
-	Sprite(std::string texturePath, float positionX = 0, float positionY = 0);
 	Sprite(ALLEGRO_BITMAP* bitmap, float positionX = 0, float positionY = 0);
 	Sprite(const Sprite& s);
-
-	~Sprite();
 
 	void draw();
 	void setPosition(float positionX, float positionY);

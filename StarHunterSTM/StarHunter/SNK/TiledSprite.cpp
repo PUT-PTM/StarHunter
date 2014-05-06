@@ -1,13 +1,13 @@
 #include "TiledSprite.h"
 
 TiledSprite::TiledSprite(
-	std::string texturePath,
+	ALLEGRO_BITMAP* bitmap,
 	int columnsCount,
 	int rowsCount,
 	float positionX,
 	float positionY 
 	) :
-Sprite(texturePath, positionX, positionY)
+Sprite(bitmap, positionX, positionY)
 {
 	this->rowsCount = rowsCount;
 	this->columnsCount = columnsCount;

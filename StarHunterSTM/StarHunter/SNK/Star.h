@@ -8,15 +8,20 @@
 
 class Star : public Entity{
 protected:	
-	Sprite sprite;
+	Sprite* sprite;
 	int usableWidth, usableHeight;
+	float displayWidth, displayHeight;
 	float emptySpaceScale, emptySpaceWidth, emptySpaceHeight;
-	void generateNewPosition();
+
+	void setupParameters();	
 	bool validateNewPosition(Entity e);
 public:
 	Star(float pX, float pY, float displayWidth, float displayHeight);
+	~Star();
 	void generateNewPositionBasedOnPlayerPosition(Entity player);
+	void generateNewPosition();
 	void setPosition(float pX, float pY);
+	void attachBitmap(ALLEGRO_BITMAP* starBitmap);
 	void draw();
 };
 

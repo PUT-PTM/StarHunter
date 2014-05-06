@@ -1,20 +1,35 @@
 #include "Star.h"
 
 Star::Star(float pX, float pY, float displayWidth, float displayHeight) : 
-	Entity(pX, pY, 0, 0),
-	sprite("assets/gfx/star.png")
+	Entity(pX, pY, 0, 0)
 {
-	setWidth(sprite.getWidth());
-	setHeight(sprite.getHeight());
+	this->displayWidth = displayWidth;
+	this->displayHeight = displayHeight;
+	sprite = nullptr;
+	srand(time(NULL));
+}
+
+Star::~Star(){
+	if(sprite)
+		delete sprite;
+}
+
+void Star::setupParameters(){
+	setWidth(sprite->getWidth());
+	setHeight(sprite->getHeight());
 
 	emptySpaceScale = 3.0f;
 	emptySpaceWidth = getWidth() * emptySpaceScale;
 	emptySpaceHeight = getHeight() * emptySpaceScale;
 	usableWidth = displayWidth - getWidth();
 	usableHeight = displayHeight - getHeight();
+}
 
-	srand(time(NULL));	
-	generateNewPosition();
+void Star::attachBitmap(ALLEGRO_BITMAP* starBitmap){
+	if(sprite)
+		delete sprite;
+	sprite = new Sprite(starBitmap);
+	setupParameters();
 }
 
 void Star::generateNewPositionBasedOnPlayerPosition(Entity player){
@@ -38,10 +53,10 @@ bool Star::validateNewPosition(Entity e){
 }
 
 void Star::setPosition(float pX, float pY){
-	sprite.setPosition(pX, pY);
+	sprite->setPosition(pX, pY);
 	Entity::setPosition(pX, pY);
 }
 
 void Star::draw(){
-	sprite.draw();
+	sprite->draw();
 };

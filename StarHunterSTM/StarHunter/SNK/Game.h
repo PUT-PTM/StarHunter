@@ -7,6 +7,8 @@
 #include "InputManager.h"
 #include "GameTimer.h"
 #include "SpaceBackground.h"
+#include "ResourcesManager.h"
+
 #include "Star.h"
 #include "Sound.h"
 
@@ -15,6 +17,7 @@ class Game{
 private:
 	Display display;
 	InputManager inputManager;
+	ResourcesManager resourcesManager;
 	GameTimer timer;
 	Player player;
 	SpaceBackground background;
@@ -27,6 +30,8 @@ private:
 	int score;
 	std::thread *drawingAndTimersRelatedLogicThread;
 
+	void initializeBitmaps();
+	void initializeFonts();
 	void initializeSound();
 	void startInitializingSound();
 	void setupInput();
@@ -36,5 +41,6 @@ private:
 	void drawingAndTimersRelatedLogicLoop();
 public:
 	Game();
+	~Game();
 	void run();
 };

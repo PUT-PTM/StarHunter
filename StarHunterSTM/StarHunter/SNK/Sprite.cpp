@@ -1,15 +1,5 @@
 #include "Sprite.h"
 
-Sprite::Sprite(std::string path, float posX, float posY){
-	bitmap = al_load_bitmap(path.c_str());
-	if(!bitmap)
-		throw new MyException("Could not load bitmap.");
-
-	this->positionX = posX;
-	this->positionY = posY;
-	this->scaleDirty = false;
-}
-
 Sprite::Sprite(ALLEGRO_BITMAP *bitmap, float posX, float posY){
 	this->bitmap = bitmap;
 	this->positionX = posX;
@@ -18,18 +8,11 @@ Sprite::Sprite(ALLEGRO_BITMAP *bitmap, float posX, float posY){
 }
 
 Sprite::Sprite(const Sprite &s){
-	bitmap = al_clone_bitmap(s.bitmap);
+	bitmap = s.bitmap;
 	positionX = s.positionX;
 	positionY = s.positionY;
 	scaleDirty = s.scaleDirty;
 	scale = s.scale;
-}
-
-Sprite::~Sprite(){
-	if(bitmap){
-		al_destroy_bitmap(bitmap);
-		bitmap = 0;
-	}
 }
 
 void Sprite::setPosition(float posX, float posY){

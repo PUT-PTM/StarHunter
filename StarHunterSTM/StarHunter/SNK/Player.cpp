@@ -2,7 +2,8 @@
 
 Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	Entity(pX, pY, 0, 0),
-	tiledSprite("assets/gfx/playerSheet.png", 3, 4),
+	amountOfRegionsHorizontally(3),
+	amountOfRegionsVertically(4),
 	startingRegionX(0),
 	startingRegionY(1)
 {
@@ -16,7 +17,21 @@ Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	direction = InputManager::MoveEventType::NONE;
 	regionNumberX = startingRegionX;
 	regionNumberY = startingRegionY;
-	tiledSprite.setPosition(this->getPositionX(), this->getPositionY());
+	tiledSprite = nullptr;
+}
+
+Player::~Player(){
+	if(tiledSprite){
+		delete tiledSprite;
+		tiledSprite = nullptr;
+	}
+}
+
+void Player::attachBitmap(ALLEGRO_BITMAP* playerSheet){
+	if(tiledSprite)
+		delete tiledSprite;
+	tiledSprite = new TiledSprite(playerSheet, amountOfRegionsHorizontally, amountOfRegionsVertically);
+	tiledSprite->setPosition(this->getPositionX(), this->getPositionY());
 }
 
 void Player::move(){
@@ -70,7 +85,7 @@ void Player::setDistancePerFrame(float pDistance){
 
 void Player::setPosition(float pX, float pY){
 	Entity::setPosition(pX, pY);
-	tiledSprite.setPosition(this->getPositionX(), this->getPositionY());
+	tiledSprite->setPosition(this->getPositionX(), this->getPositionY());
 }
 
 void Player::changeDirection(InputManager::MoveEventType newDirection){
@@ -91,11 +106,11 @@ void Player::changeDirection(InputManager::MoveEventType newDirection){
 void Player::animate(){
 	if(animation){
 		regionNumberY++;
-		if(regionNumberY >= tiledSprite.getColumnsCount())
+		if(regionNumberY >= tiledSprite->getColumnsCount())
 			regionNumberY = 0;
 	}
 }
 
 void Player::draw(){
-	tiledSprite.drawRegion(regionNumberX, regionNumberY);
+	tiledSprite->drawRegion(regionNumberX, regionNumberY);
 }

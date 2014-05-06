@@ -10,7 +10,7 @@ private:
 	void countRegionSize();
 public:
 	TiledSprite(
-		std::string texturePath,
+		ALLEGRO_BITMAP* bitmap,
 		int columnsCount,
 		int rowsCount,
 		float positionX = 0.0,

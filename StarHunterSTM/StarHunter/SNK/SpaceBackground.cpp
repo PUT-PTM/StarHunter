@@ -5,19 +5,15 @@ SpaceBackground::SpaceBackground(Display *display){
 	this->display = display;
 	speed =  1.0f;
 	direction = InputManager::MoveEventType::NONE;
-	initializeTile();
+	setupPositions();
 }
 
 SpaceBackground::~SpaceBackground(){
 	al_destroy_bitmap(tileBitmap);
 }
 
-void SpaceBackground::initializeTile(){
-	tileBitmap = al_load_bitmap("assets/gfx/background.png");
-	if(!tileBitmap)
-		throw MyException("Could not load background bitmap.");
-
-	setupPositions();
+void SpaceBackground::attachBitmap(ALLEGRO_BITMAP* backgroundBitmap){
+	tileBitmap = backgroundBitmap;
 }
 
 void SpaceBackground::setupPositions(){
