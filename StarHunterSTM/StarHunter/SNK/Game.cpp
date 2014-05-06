@@ -36,7 +36,7 @@ void Game::initializeBitmaps(){
 
 void Game::initializeFonts(){
 	resourcesManager.loadFonts();
-	// wywolac metode type gui.attachFonts / gui.attachFont
+	gui.attachFont(resourcesManager.textFont);
 }
 
 void Game::startInitializingSound(){
@@ -105,7 +105,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 					star.generateNewPositionBasedOnPlayerPosition(player);
 					sound.playStarSoundEffect();
 					score++;
-					// TUTAJ WYWOLAC METODE TYPU gui.setScore(score);
+					gui.setScore(score);
 				};
 
 				draw = true;
@@ -117,14 +117,14 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 
 		if(draw){
 			display.clear();
-
+			
 			background.draw();
 			star.draw();
 			player.draw();
-			// DODAC RYSOWANIE GUI gui.draw();
-
+			gui.drawScore();
 			display.flip();
 			draw = false;
+			
 		}
 	}
 }

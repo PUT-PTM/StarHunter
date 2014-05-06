@@ -70,7 +70,7 @@ void STMInputManager::collectRawInput(){
 		averageX /= count;
 		averageY /= count;
 		getEventFromRaw(averageX, averageY);
-		count = averageX = averageY = 0;
+		averageX = averageY = count = 0;
 
 		watch.restart();
 	}

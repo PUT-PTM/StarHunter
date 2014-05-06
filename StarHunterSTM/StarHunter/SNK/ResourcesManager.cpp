@@ -7,6 +7,8 @@ ResourcesManager::ResourcesManager(){
 
 	starCatchEffectSample = nullptr;
 	mainBackgroundThemeSample = nullptr;
+
+	textFont = nullptr;
 }
 
 void ResourcesManager::loadBitmaps(){
@@ -33,8 +35,15 @@ void ResourcesManager::unloadBitmaps(){
 }
 
 void ResourcesManager::loadFonts(){
+	textFont = al_load_font("assets/gfx/font.ttf", 35, 0);
+	if(!textFont)
+		throw MyException("Could not load font");
 }
 void ResourcesManager::unloadFonts(){
+	if(textFont){
+		al_destroy_font(textFont);
+		textFont = nullptr;
+	}	
 }
 
 void ResourcesManager::loadSounds(){

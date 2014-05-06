@@ -11,6 +11,7 @@
 
 #include "Star.h"
 #include "Sound.h"
+#include "Gui.h"
 
 
 class Game{
@@ -23,6 +24,7 @@ private:
 	SpaceBackground background;
 	Star star;
 	Sound sound;
+	Gui gui;
 
 	float oldPosX, oldPosY;
 
