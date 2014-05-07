@@ -22,8 +22,8 @@ InputManager::InputManager(Display &display) : allegroInputManager(display)
 	lastMove = NONE;
 }
 
-void InputManager::connectSTM(){
-	stmInputManager.connect();
+bool InputManager::connectSTM(){
+	return stmInputManager.connect();
 }
 
 void InputManager::registerSTM(){

@@ -1,6 +1,10 @@
 #include "STMInputManager.h"
 #include <iostream>
-STMInputManager::STMInputManager(){
+STMInputManager::STMInputManager() :
+	valueNeededToChangeDirection(12.0f),
+	valueNeededToThrowEvent(6.0f),
+	yOffset(4.5f)
+{
 	initializeParameters();
 	clearBuffer();
 }
@@ -78,7 +82,7 @@ void STMInputManager::collectRawInput(){
 
 void STMInputManager::getEventFromRaw(double rawX, double rawY){
 
-	rawY -= 4.0;
+	rawY -= yOffset;
 
 	if(rawX < 0)
 		left = true;
@@ -95,7 +99,8 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 
 	std::cout << valueY << "  "  << valueX << std::endl;
 
-	if(valueY > 13.0f || valueX > 13.0f){
+	if(valueY > valueNeededToChangeDirection ||
+		valueX > valueNeededToChangeDirection){
 		if(valueY > valueX){
 			if(up)
 				currentEvent = STMInputEvent::STM_UP;
@@ -109,7 +114,8 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 				currentEvent = STMInputEvent::STM_RIGHT;
 		}
 	}
-	else if(valueY < 7.0f && valueX < 7.0f)
+	else if(valueY < valueNeededToThrowEvent &&
+		valueX < valueNeededToThrowEvent)
 		currentEvent = STMInputEvent::STM_NONE;
 
 }

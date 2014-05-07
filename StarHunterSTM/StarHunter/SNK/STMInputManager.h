@@ -29,6 +29,9 @@ private:
 	bool connected, registering, bufferDirty;
 	bool up, left;
 	char buffer_in[64];
+	const float valueNeededToChangeDirection;
+	const float valueNeededToThrowEvent;
+	const float yOffset;
 
 	double averageY, averageX;
 	unsigned count;

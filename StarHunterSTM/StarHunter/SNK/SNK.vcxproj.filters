@@ -87,10 +87,13 @@
     <ClCompile Include="Star.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="ResourcesManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Gui.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="AllegroStopWatch.cpp">
+      <Filter>Source Files\Allegro</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourcesManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,10 +149,13 @@
     <ClInclude Include="Star.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="ResourcesManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Gui.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AllegroStopWatch.h">
+      <Filter>Header Files\Allegro</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcesManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

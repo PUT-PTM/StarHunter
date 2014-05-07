@@ -3,17 +3,23 @@
 
 class Gui{	
 protected:
-	ALLEGRO_FONT *textFont;
-	int score;
-	bool fontLoaded;
-	
-public:
-	Gui();
-	~Gui();
-	void attachFont(ALLEGRO_FONT *textFont);
+	ALLEGRO_FONT *textFont, *bigTextFont;
+	ALLEGRO_COLOR fontColor;
+	const int fontSize;
+	int score, time;
+	float scorePositionX, scorePositionY;
+	float timePositionX, timePositionY;
+	float onPausedTextPositionX, onPausedTextPositionY;
+
+	void setupPositions(float displayWidth, float displayHeight);	
 	void drawScore();
+	void drawTime();
+public:
+	Gui(float displayWidth, float displayHeight);
+	~Gui();
+	void attachFonts(ALLEGRO_FONT *textFont, ALLEGRO_FONT *bigTextFont);
+	void draw();
+	void drawOnPause();
 	void setScore(int score);
-	int getScore();
-
-
+	void setTime(int time);
 };

@@ -27,7 +27,7 @@ public:
 	};
 
 	InputManager(Display &display);
-	void connectSTM();
+	bool connectSTM();
 	void registerSTM();
 	void registerAllegro();
 	void endRegistering();

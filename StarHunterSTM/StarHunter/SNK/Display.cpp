@@ -2,6 +2,7 @@
 
 Display::Display(int width, int height){
 	display = al_create_display(width, height);
+	al_set_window_title(display, "StarHunter");
  
     if(!display)
 		throw new MyException("Could not create Allegro Display");

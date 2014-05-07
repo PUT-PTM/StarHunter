@@ -10,6 +10,11 @@ milliseconds intervalInMiliSeconds(const high_resolution_clock::time_point& t1,c
 	return duration_cast<milliseconds>(t1 - t0);
 }
 
+seconds intervalInSeconds(const high_resolution_clock::time_point& t1,const high_resolution_clock::time_point& t0)
+{
+	return duration_cast<seconds>(t1 - t0);
+}
+
 StopWatch::StopWatch() : 
 	start_(high_resolution_clock::now())
 {}
@@ -28,4 +33,9 @@ microseconds StopWatch::elapsedUs()
 milliseconds StopWatch::elapsedMs()    
 { 
 	return intervalInMiliSeconds(high_resolution_clock::now(), start_);
+}
+
+seconds StopWatch::elapsedSeconds()
+{
+	return intervalInSeconds(high_resolution_clock::now(), start_);
 }

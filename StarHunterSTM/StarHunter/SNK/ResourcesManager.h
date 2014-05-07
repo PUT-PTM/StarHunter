@@ -7,14 +7,15 @@
 
 class ResourcesManager{
 public:
-	ALLEGRO_BITMAP* backgroundBitmap;
-	ALLEGRO_BITMAP* playerSheetBitmap;
-	ALLEGRO_BITMAP* starBitmap;
+	ALLEGRO_BITMAP *backgroundBitmap;
+	ALLEGRO_BITMAP *playerSheetBitmap;
+	ALLEGRO_BITMAP *starBitmap;
 
 	ALLEGRO_SAMPLE *starCatchEffectSample;
 	ALLEGRO_SAMPLE *mainBackgroundThemeSample;
 
-	ALLEGRO_FONT * textFont;
+	ALLEGRO_FONT *textFont;
+	ALLEGRO_FONT *bigTextFont;
 	
 	ResourcesManager();
 	//throws MyException

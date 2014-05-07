@@ -4,15 +4,19 @@ Game::Game() :
 	display(800, 600),
 	inputManager(display),
 	player(
-	display.getWidth() / 2.0f, display.getHeight() / 2.0f,
-	display.getWidth(), display.getHeight()),
+		display.getWidth() / 2.0f, display.getHeight() / 2.0f,
+		display.getWidth(), display.getHeight()),
 	background(&display),
+	gui(display.getWidth(), display.getHeight()),
 	star(50, 50, display.getWidth(), display.getHeight())
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
+	maxTime = 60;
 	end = false;
 	draw = true;
 	score = 0;
+	state = NotStarted;
+	gui.setTime(maxTime);
 
 
 	startInitializingSound();
@@ -22,6 +26,7 @@ Game::Game() :
 }
 
 Game::~Game(){
+	startInitializingSountThread->join();
 	resourcesManager.unloadSounds();
 }
 
@@ -36,11 +41,11 @@ void Game::initializeBitmaps(){
 
 void Game::initializeFonts(){
 	resourcesManager.loadFonts();
-	gui.attachFont(resourcesManager.textFont);
+	gui.attachFonts(resourcesManager.textFont, resourcesManager.bigTextFont);
 }
 
 void Game::startInitializingSound(){
-	std::thread *t = new std::thread(&Game::initializeSound, this);
+	startInitializingSountThread = new std::thread(&Game::initializeSound, this);
 }
 
 void Game::initializeSound(){
@@ -51,9 +56,8 @@ void Game::initializeSound(){
 }
 
 void Game::setupInput(){
-
-	//inputManager.connectSTM();
-	//inputManager.registerSTM();
+	if(inputManager.connectSTM())
+		inputManager.registerSTM();
 	inputManager.registerAllegro();
 }
 
@@ -84,9 +88,19 @@ void Game::logicLoop(){
 
 		if(inputEvent.exitInitialized())
 			end = true;
+		if(state != Paused){
+			player.changeDirection(inputEvent.getLastMove());
+			background.changeDirection(inputEvent.getLastMove());
+			if(state != NotStarted){
+				int elapsedSeconds = (int)watch.getElapsedSeconds();
+				gui.setTime(maxTime - elapsedSeconds);
 
-		player.changeDirection(inputEvent.getLastMove());
-		background.changeDirection(inputEvent.getLastMove());
+				if(elapsedSeconds >= maxTime)
+					pauseGame();
+			}
+		}
+		else if(inputEvent.enterPressed())
+			restartGame();
 	}
 }
 
@@ -94,7 +108,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
 	while(!end){
 		GameTimer::TimerTickType timerType = timer.getTimerTick();
-		if(timerType != GameTimer::TimerTickType::NONE)
+		if(timerType != GameTimer::TimerTickType::NONE && state != Paused)
 		{
 			if(timerType == GameTimer::TimerTickType::MAIN){		// Main timer
 				background.move();
@@ -102,6 +116,9 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 
 				if(player.collidesWith(star))
 				{
+					if(state != Started)
+						startGame();
+
 					star.generateNewPositionBasedOnPlayerPosition(player);
 					sound.playStarSoundEffect();
 					score++;
@@ -121,10 +138,29 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 			background.draw();
 			star.draw();
 			player.draw();
-			gui.drawScore();
+			gui.draw();
+			if(state == Paused)
+				gui.drawOnPause();
+
 			display.flip();
 			draw = false;
 			
 		}
 	}
+}
+
+void Game::restartGame(){
+	state = NotStarted;
+	score = 0;
+	gui.setScore(score);
+	gui.setTime(maxTime);
+}
+
+void Game::startGame(){
+	state = Started;
+	watch.restart();
+}
+
+void Game::pauseGame(){
+	state = Paused;
 }

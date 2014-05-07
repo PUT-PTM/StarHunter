@@ -36,7 +36,8 @@ void ResourcesManager::unloadBitmaps(){
 
 void ResourcesManager::loadFonts(){
 	textFont = al_load_font("assets/gfx/font.ttf", 35, 0);
-	if(!textFont)
+	bigTextFont = al_load_font("assets/gfx/font.ttf", 50, 0);
+	if(!textFont || !bigTextFont)
 		throw MyException("Could not load font");
 }
 void ResourcesManager::unloadFonts(){
