@@ -1,3 +1,5 @@
+#define ALLEGRO_STATICLINK
+
 #include "AllegroInitializer.h"
 #include "Game.h"
 #include <iostream>
