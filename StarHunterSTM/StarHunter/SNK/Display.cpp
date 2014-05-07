@@ -40,3 +40,7 @@ int Display::getWidth(){
 int Display::getHeight(){
 	return height;
 }
+
+void Display::setIcon(ALLEGRO_BITMAP *icon){
+	al_set_display_icon(display, icon);
+}

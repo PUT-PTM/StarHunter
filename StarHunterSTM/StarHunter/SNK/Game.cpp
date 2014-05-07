@@ -32,6 +32,7 @@ Game::~Game(){
 
 void Game::initializeBitmaps(){
 	resourcesManager.loadBitmaps();
+	display.setIcon(resourcesManager.starBitmap);
 	player.attachBitmap(resourcesManager.playerSheetBitmap);
 	background.attachBitmap(resourcesManager.backgroundBitmap);
 	star.attachBitmap(resourcesManager.starBitmap);
@@ -56,8 +57,8 @@ void Game::initializeSound(){
 }
 
 void Game::setupInput(){
-	if(inputManager.connectSTM())
-		inputManager.registerSTM();
+	//if(inputManager.connectSTM())
+	//	inputManager.registerSTM();
 	inputManager.registerAllegro();
 }
 
@@ -101,6 +102,7 @@ void Game::logicLoop(){
 		}
 		else if(inputEvent.enterPressed())
 			restartGame();
+		Sleep(0);
 	}
 }
 
@@ -108,11 +110,12 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
 	while(!end){
 		GameTimer::TimerTickType timerType = timer.getTimerTick();
-		if(timerType != GameTimer::TimerTickType::NONE && state != Paused)
+		if(timerType != GameTimer::TimerTickType::NONE)
 		{
 			if(timerType == GameTimer::TimerTickType::MAIN){		// Main timer
-				background.move();
-				player.move();
+				if(state != Paused){
+					background.move();
+					player.move();
 
 				if(player.collidesWith(star))
 				{
@@ -124,11 +127,13 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 					score++;
 					gui.setScore(score);
 				};
+				}
 
 				draw = true;
 			}
 			else{													// Animation timer
-				player.animate();
+				if(state != Paused)
+					player.animate();
 			}		
 		}
 

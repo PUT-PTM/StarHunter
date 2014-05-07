@@ -18,4 +18,5 @@ public:
 	ALLEGRO_DISPLAY* getAllegroDisplay();
 	int getWidth();
 	int getHeight();
+	void setIcon(ALLEGRO_BITMAP *icon);
 };

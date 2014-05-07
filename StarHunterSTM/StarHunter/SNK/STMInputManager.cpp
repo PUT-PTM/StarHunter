@@ -97,8 +97,6 @@ void STMInputManager::getEventFromRaw(double rawX, double rawY){
 	double valueY = abs(rawY);
 	double valueX = abs(rawX);
 
-	std::cout << valueY << "  "  << valueX << std::endl;
-
 	if(valueY > valueNeededToChangeDirection ||
 		valueX > valueNeededToChangeDirection){
 		if(valueY > valueX){

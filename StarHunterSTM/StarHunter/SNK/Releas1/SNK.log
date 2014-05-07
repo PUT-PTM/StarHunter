@@ -1,0 +1,57 @@
+﻿Build started 2014-05-07 18:14:42.
+     1>Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Releas1\\" /Fd"Releas1\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AllegroInitializer.cpp AllegroInputManager.cpp AllegroStopWatch.cpp Display.cpp Entity.cpp Gui.cpp Game.cpp GameTimer.cpp hid.cpp InputManager.cpp main.cpp MyException.cpp Player.cpp ResourcesManager.cpp Sound.cpp SpaceBackground.cpp Sprite.cpp Star.cpp STMInputManager.cpp Stopwatch.cpp TiledSprite.cpp
+         TiledSprite.cpp
+         Stopwatch.cpp
+         STMInputManager.cpp
+         Star.cpp
+         Sprite.cpp
+         SpaceBackground.cpp
+         Sound.cpp
+         ResourcesManager.cpp
+         Player.cpp
+         MyException.cpp
+         main.cpp
+         InputManager.cpp
+         hid.cpp
+         GameTimer.cpp
+         Game.cpp
+         Gui.cpp
+         Entity.cpp
+         Display.cpp
+         AllegroStopWatch.cpp
+         AllegroInputManager.cpp
+         Generating Code...
+         Compiling...
+         AllegroInitializer.cpp
+         Generating Code...
+       Link:
+         F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\allegro\lib "allegro-5.0.8-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.lib" /MACHINE:X86 Releas1\AllegroInitializer.obj
+         Releas1\AllegroInputManager.obj
+         Releas1\AllegroStopWatch.obj
+         Releas1\Display.obj
+         Releas1\Entity.obj
+         Releas1\Gui.obj
+         Releas1\Game.obj
+         Releas1\GameTimer.obj
+         Releas1\hid.obj
+         Releas1\InputManager.obj
+         Releas1\main.obj
+         Releas1\MyException.obj
+         Releas1\Player.obj
+         Releas1\ResourcesManager.obj
+         Releas1\Sound.obj
+         Releas1\SpaceBackground.obj
+         Releas1\Sprite.obj
+         Releas1\Star.obj
+         Releas1\STMInputManager.obj
+         Releas1\Stopwatch.obj
+         Releas1\TiledSprite.obj
+         icon.res
+         SNK.vcxproj -> E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.exe
+     1>Done Building Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:17.94

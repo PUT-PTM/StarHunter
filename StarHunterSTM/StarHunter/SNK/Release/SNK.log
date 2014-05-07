@@ -1,7 +1,7 @@
-﻿Build started 2014-05-07 16:01:28.
-     1>Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 2014-05-07 17:37:35.
+     1>Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AllegroInitializer.cpp AllegroInputManager.cpp AllegroStopWatch.cpp Display.cpp Entity.cpp Gui.cpp Game.cpp GameTimer.cpp hid.cpp InputManager.cpp main.cpp MyException.cpp Player.cpp ResourcesManager.cpp Sound.cpp SpaceBackground.cpp Sprite.cpp Star.cpp STMInputManager.cpp Stopwatch.cpp TiledSprite.cpp
+         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /Zi /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AllegroInitializer.cpp AllegroInputManager.cpp AllegroStopWatch.cpp Display.cpp Entity.cpp Gui.cpp Game.cpp GameTimer.cpp hid.cpp InputManager.cpp main.cpp MyException.cpp Player.cpp ResourcesManager.cpp Sound.cpp SpaceBackground.cpp Sprite.cpp Star.cpp STMInputManager.cpp Stopwatch.cpp TiledSprite.cpp
          AllegroInitializer.cpp
          AllegroInputManager.cpp
          AllegroStopWatch.cpp
@@ -22,10 +22,12 @@
          Star.cpp
          STMInputManager.cpp
          Stopwatch.cpp
+         Generating Code...
          Compiling...
          TiledSprite.cpp
+         Generating Code...
        Link:
-         F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.exe" /NOLOGO /LIBPATH:C:\allegro\lib "allegro-5.0.8-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.lib" /MACHINE:X86 /SAFESEH Release\AllegroInitializer.obj
+         F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.exe" /NOLOGO /LIBPATH:C:\allegro\lib "allegro-5.0.8-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.pdb" /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.lib" /MACHINE:X86 /SAFESEH Release\AllegroInitializer.obj
          Release\AllegroInputManager.obj
          Release\AllegroStopWatch.obj
          Release\Display.obj
@@ -46,11 +48,9 @@
          Release\STMInputManager.obj
          Release\Stopwatch.obj
          Release\TiledSprite.obj
-         Generating code
-         Finished generating code
          SNK.vcxproj -> E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Release\StarHunter.exe
-     1>Done Building Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:13.86
+Time Elapsed 00:00:13.34

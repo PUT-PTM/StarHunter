@@ -15,7 +15,8 @@ void ResourcesManager::loadBitmaps(){
 	backgroundBitmap = al_load_bitmap("assets/gfx/background.png");
 	playerSheetBitmap = al_load_bitmap("assets/gfx/playerSheet.png");
 	starBitmap = al_load_bitmap("assets/gfx/star.png");
-	if(!backgroundBitmap || !playerSheetBitmap || !starBitmap)
+	icon = al_load_bitmap("assets/gfx/star.ico");
+	if(!backgroundBitmap || !playerSheetBitmap || !starBitmap || icon)
 		throw MyException("Could not load bitmap.");
 }
 

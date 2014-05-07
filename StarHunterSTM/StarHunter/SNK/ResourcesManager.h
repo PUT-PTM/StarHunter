@@ -10,6 +10,7 @@ public:
 	ALLEGRO_BITMAP *backgroundBitmap;
 	ALLEGRO_BITMAP *playerSheetBitmap;
 	ALLEGRO_BITMAP *starBitmap;
+	ALLEGRO_BITMAP *icon;
 
 	ALLEGRO_SAMPLE *starCatchEffectSample;
 	ALLEGRO_SAMPLE *mainBackgroundThemeSample;

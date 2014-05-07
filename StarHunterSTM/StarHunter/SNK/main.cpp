@@ -15,9 +15,13 @@ int main(){
 		game.run();
 	}
 	catch(MyException e){
-		std::cout << e.getMessage() << std::endl;
-		std::cin.sync();
-		std::cin.get();
+		al_show_native_message_box(
+			0,
+			"Error",
+			"",
+			e.getMessage().c_str(),
+			0,
+			ALLEGRO_MESSAGEBOX_ERROR);
 	}	
 
 	return 0;
