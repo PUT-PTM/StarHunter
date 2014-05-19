@@ -57,8 +57,8 @@ void Game::initializeSound(){
 }
 
 void Game::setupInput(){
-	//if(inputManager.connectSTM())
-	//	inputManager.registerSTM();
+	if(inputManager.connectSTM())
+		inputManager.registerSTM();
 	inputManager.registerAllegro();
 }
 
