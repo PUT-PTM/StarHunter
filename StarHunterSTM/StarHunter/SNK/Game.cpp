@@ -159,6 +159,7 @@ void Game::restartGame(){
 	score = 0;
 	gui.setScore(score);
 	gui.setTime(maxTime);
+	watch.restart();
 }
 
 void Game::startGame(){
