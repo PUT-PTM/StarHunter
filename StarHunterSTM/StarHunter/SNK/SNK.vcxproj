@@ -122,6 +122,10 @@
     <ClCompile Include="SpaceBackground.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Star.cpp" />
+    <ClCompile Include="StarBlue.cpp" />
+    <ClCompile Include="StarGreen.cpp" />
+    <ClCompile Include="StarRed.cpp" />
+    <ClCompile Include="StarYellow.cpp" />
     <ClCompile Include="STMInputManager.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="TiledSprite.cpp" />
@@ -136,6 +140,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="hid.h" />
+    <ClInclude Include="IAffecting.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyException.h" />
     <ClInclude Include="Player.h" />
@@ -144,6 +149,10 @@
     <ClInclude Include="SpaceBackground.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Star.h" />
+    <ClInclude Include="StarBlue.h" />
+    <ClInclude Include="StarGreen.h" />
+    <ClInclude Include="StarRed.h" />
+    <ClInclude Include="StarYellow.h" />
     <ClInclude Include="STMInputManager.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="TiledSprite.h" />

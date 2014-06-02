@@ -2,7 +2,10 @@
 
 GameTimer::GameTimer(){
 	mainTimer = al_create_timer(1.0 / 100);
-	animationTimer = al_create_timer(1.0 / 8);
+
+	animation = 8;
+	
+	animationTimer = al_create_timer(1.0 / animation);
 	queue = al_create_event_queue();
 	al_register_event_source(queue, al_get_timer_event_source(mainTimer));
 	al_register_event_source(queue, al_get_timer_event_source(animationTimer));
@@ -43,5 +46,15 @@ GameTimer::TimerTickType GameTimer::getTimerTick(){
 			type = ANIMATION;
 	}
 	return type;
+}
+
+void GameTimer::setAnimation(int an)
+{
+	this->animation = an;
+}
+
+int GameTimer::getAnimation()
+{
+	return this->animation;
 }
 

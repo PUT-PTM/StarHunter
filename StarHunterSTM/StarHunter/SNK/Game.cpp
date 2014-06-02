@@ -8,13 +8,18 @@ Game::Game() :
 		display.getWidth(), display.getHeight()),
 	background(&display),
 	gui(display.getWidth(), display.getHeight()),
-	star(50, 50, display.getWidth(), display.getHeight())
+	starYellow(50, 50, display.getWidth(), display.getHeight()),
+	starGreen(100, 100, display.getWidth(), display.getHeight()),
+	starBlue(200, 200, display.getWidth(), display.getHeight()),
+	starRed(300, 300, display.getWidth(), display.getHeight())
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
 	maxTime = 60;
 	end = false;
 	draw = true;
 	score = 0;
+	change = 0;
+	timer.setAnimation(8);
 	state = NotStarted;
 	gui.setTime(maxTime);
 
@@ -32,12 +37,21 @@ Game::~Game(){
 
 void Game::initializeBitmaps(){
 	resourcesManager.loadBitmaps();
-	display.setIcon(resourcesManager.starBitmap);
+	display.setIcon(resourcesManager.starYellowBitmap);
 	player.attachBitmap(resourcesManager.playerSheetBitmap);
 	background.attachBitmap(resourcesManager.backgroundBitmap);
-	star.attachBitmap(resourcesManager.starBitmap);
-	star.generateNewPosition();
-	star.generateNewPositionBasedOnPlayerPosition(player);
+
+	starYellow.attachBitmap(resourcesManager.starYellowBitmap);
+	starGreen.attachBitmap(resourcesManager.starGreenBitmap);
+	starBlue.attachBitmap(resourcesManager.starBlueBitmap);
+	starRed.attachBitmap(resourcesManager.starRedBitmap);
+
+	starYellow.generateNewPosition();
+	starYellow.generateNewPositionBasedOnPlayerPosition(player);
+	starGreen.generateNewPosition();
+	
+	starBlue.generateNewPosition();
+	starRed.generateNewPosition();
 }
 
 void Game::initializeFonts(){
@@ -64,6 +78,7 @@ void Game::setupInput(){
 
 void Game::run(){
 	timer.start();
+	
 
 	startDrawingAndTimersRelatedLogic();
 	logicLoop();
@@ -108,6 +123,10 @@ void Game::logicLoop(){
 
 void Game::drawingAndTimersRelatedLogicLoop(){
 	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
+	srand(time(NULL));
+	
+	
+	std::cout << change;
 	while(!end){
 		GameTimer::TimerTickType timerType = timer.getTimerTick();
 		if(timerType != GameTimer::TimerTickType::NONE)
@@ -117,18 +136,134 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 					background.move();
 					player.move();
 
-				if(player.collidesWith(star))
+					// Nowe gwiazdki, prawdopodobienstwo 2:1:1:1 (star, green, blue, red)
+					if(change == 0 || change == 1)
+						if(player.collidesWith(starYellow))
 				{
 					if(state != Started)
 						startGame();
+					
+					change = (std::rand()% 5 ) + 0;
 
-					star.generateNewPositionBasedOnPlayerPosition(player);
+					switch(change)
+					{
+					case 0:
+					case 1:
+					starYellow.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 2:
+					starGreen.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 3:
+					starBlue.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					default:
+					starRed.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					}
+					
 					sound.playStarSoundEffect();
-					score++;
-					gui.setScore(score);
+					//score = starYellow.affect(player, score);
+					
 				};
-				}
+				
+						if(change == 2)
+				if(player.collidesWith(starGreen))
+				{
+					
+					if(state != Started)
+						startGame();
+					change = (std::rand()% 5 ) + 0;
 
+					switch(change)
+					{
+					case 0:
+					case 1:
+					starYellow.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 2:
+					starGreen.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 3:
+					starBlue.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					default:
+					starRed.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					}
+					
+					sound.playStarSoundEffect();
+					score--;
+					gui.setScore(score);
+					
+				};
+
+						if(change == 3)
+				if(player.collidesWith(starBlue))
+				{
+					
+					if(state != Started)
+						startGame();
+					change = (std::rand()% 5 ) + 0;
+
+					switch(change)
+					{
+					case 0:
+					case 1:
+					starYellow.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 2:
+					starGreen.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 3:
+					starBlue.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					default:
+					starRed.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					}
+
+					sound.playStarSoundEffect();
+					timer.setAnimation(15);
+					
+				};
+
+
+						if(change == 4)
+				if(player.collidesWith(starRed))
+				{
+					
+					if(state != Started)
+						startGame();
+					change = (std::rand()% 5 ) + 0;
+
+					switch(change)
+					{
+					case 0:
+					case 1:
+					starYellow.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 2:
+					starGreen.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					case 3:
+					starBlue.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					default:
+					starRed.generateNewPositionBasedOnPlayerPosition(player);
+					break;
+					}
+
+					sound.playStarSoundEffect();
+					score += 2;
+					gui.setScore(score);
+					
+				};
+				
+				
+
+				}
+				
 				draw = true;
 			}
 			else{													// Animation timer
@@ -141,7 +276,24 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 			display.clear();
 			
 			background.draw();
-			star.draw();
+
+			switch(change)
+			{
+				case 0:
+				case 1:
+			starYellow.draw();	
+			break;
+				case 2:
+			starGreen.draw();
+			break;
+				case 3:
+			starBlue.draw();
+			break;
+				default:
+			starRed.draw();
+			break;
+			}
+
 			player.draw();
 			gui.draw();
 			if(state == Paused)
@@ -157,6 +309,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 void Game::restartGame(){
 	state = NotStarted;
 	score = 0;
+	
 	gui.setScore(score);
 	gui.setTime(maxTime);
 	watch.restart();

@@ -9,7 +9,10 @@ class ResourcesManager{
 public:
 	ALLEGRO_BITMAP *backgroundBitmap;
 	ALLEGRO_BITMAP *playerSheetBitmap;
-	ALLEGRO_BITMAP *starBitmap;
+	ALLEGRO_BITMAP *starYellowBitmap;
+	ALLEGRO_BITMAP *starGreenBitmap;
+	ALLEGRO_BITMAP *starBlueBitmap;
+	ALLEGRO_BITMAP *starRedBitmap;
 	ALLEGRO_BITMAP *icon;
 
 	ALLEGRO_SAMPLE *starCatchEffectSample;

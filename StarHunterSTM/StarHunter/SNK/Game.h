@@ -11,7 +11,10 @@
 
 #include "Display.h"
 #include "Player.h"
-#include "Star.h"
+#include "StarYellow.h"
+#include "StarGreen.h"
+#include "StarBlue.h"
+#include "StarRed.h"
 #include "Sound.h"
 #include "Gui.h"
 
@@ -31,13 +34,19 @@ private:
 	AllegroStopWatch watch;
 	Player player;
 	SpaceBackground background;
-	Star star;
+	StarYellow starYellow;
+	StarGreen starGreen;
+	StarBlue starBlue;
+	StarRed starRed;
 	Sound sound;
 	Gui gui;
 	GameState state;
 
 	bool end, draw;
 	int score;
+	int change;		
+
+
 	std::thread *drawingAndTimersRelatedLogicThread;
 	std::thread *startInitializingSountThread;
 
@@ -57,4 +66,5 @@ public:
 	Game();
 	~Game();
 	void run();
+	
 };

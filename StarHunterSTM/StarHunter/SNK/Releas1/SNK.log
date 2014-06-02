@@ -1,10 +1,37 @@
-﻿Build started 2014-05-20 20:37:47.
-     1>Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2014-06-02 21:44:48.
+     1>Project "C:\Users\XXX\Desktop\StarHunter\StarHunter\SNK\SNK.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Releas1\\" /Fd"Releas1\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         F:\Apps\VisualStudio2012\VC\bin\CL.exe /c /IC:\allegro\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Releas1\\" /Fd"Releas1\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AllegroInitializer.cpp AllegroInputManager.cpp AllegroStopWatch.cpp Display.cpp Entity.cpp Gui.cpp Game.cpp GameTimer.cpp hid.cpp InputManager.cpp main.cpp MyException.cpp Player.cpp ResourcesManager.cpp Sound.cpp SpaceBackground.cpp Sprite.cpp Star.cpp StarBlue.cpp StarGreen.cpp StarRed.cpp StarYellow.cpp STMInputManager.cpp Stopwatch.cpp TiledSprite.cpp
+         TiledSprite.cpp
+         Stopwatch.cpp
+         STMInputManager.cpp
+         StarYellow.cpp
+         StarRed.cpp
+         StarGreen.cpp
+         StarBlue.cpp
+         Star.cpp
+         Sprite.cpp
+         SpaceBackground.cpp
+         Sound.cpp
+         ResourcesManager.cpp
+         Player.cpp
+         MyException.cpp
+         main.cpp
+         InputManager.cpp
+         hid.cpp
+         GameTimer.cpp
          Game.cpp
+         Gui.cpp
+         Generating Code...
+         Compiling...
+         Entity.cpp
+         Display.cpp
+         AllegroStopWatch.cpp
+         AllegroInputManager.cpp
+         AllegroInitializer.cpp
+         Generating Code...
        Link:
-         F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\allegro\lib "allegro-5.0.8-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.lib" /MACHINE:X86 Releas1\AllegroInitializer.obj
+         F:\Apps\VisualStudio2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\XXX\Desktop\StarHunter\StarHunter\Releas1\StarHunter.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\allegro\lib "allegro-5.0.8-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\XXX\Desktop\StarHunter\StarHunter\Releas1\StarHunter.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\XXX\Desktop\StarHunter\StarHunter\Releas1\StarHunter.lib" /MACHINE:X86 Releas1\AllegroInitializer.obj
          Releas1\AllegroInputManager.obj
          Releas1\AllegroStopWatch.obj
          Releas1\Display.obj
@@ -22,13 +49,17 @@
          Releas1\SpaceBackground.obj
          Releas1\Sprite.obj
          Releas1\Star.obj
+         Releas1\StarBlue.obj
+         Releas1\StarGreen.obj
+         Releas1\StarRed.obj
+         Releas1\StarYellow.obj
          Releas1\STMInputManager.obj
          Releas1\Stopwatch.obj
          Releas1\TiledSprite.obj
          icon.res
-         SNK.vcxproj -> E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\Releas1\StarHunter.exe
-     1>Done Building Project "E:\GITHUB\StarHunter\StarHunterSTM\StarHunter\SNK\SNK.vcxproj" (Build target(s)).
+         SNK.vcxproj -> C:\Users\XXX\Desktop\StarHunter\StarHunter\Releas1\StarHunter.exe
+     1>Done Building Project "C:\Users\XXX\Desktop\StarHunter\StarHunter\SNK\SNK.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.21
+Time Elapsed 00:00:23.87

@@ -17,11 +17,10 @@ protected:
 	bool validateNewPosition(Entity e);
 public:
 	Star(float pX, float pY, float displayWidth, float displayHeight);
-	~Star();
+	virtual ~Star();
 	void generateNewPositionBasedOnPlayerPosition(Entity player);
 	void generateNewPosition();
 	void setPosition(float pX, float pY);
 	void attachBitmap(ALLEGRO_BITMAP* starBitmap);
 	void draw();
 };
-

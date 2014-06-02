@@ -84,9 +84,6 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Star.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Gui.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -94,6 +91,21 @@
       <Filter>Source Files\Allegro</Filter>
     </ClCompile>
     <ClCompile Include="ResourcesManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StarGreen.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StarBlue.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StarRed.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StarYellow.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,9 +158,6 @@
     <ClInclude Include="Sound.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Star.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Gui.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -156,6 +165,24 @@
       <Filter>Header Files\Allegro</Filter>
     </ClInclude>
     <ClInclude Include="ResourcesManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StarGreen.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StarBlue.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StarRed.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StarYellow.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="IAffecting.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,7 +3,10 @@
 ResourcesManager::ResourcesManager(){
 	backgroundBitmap = nullptr;
 	playerSheetBitmap = nullptr;
-	starBitmap = nullptr;
+	starYellowBitmap = nullptr;
+	starGreenBitmap = nullptr;
+	starBlueBitmap = nullptr;
+	starRedBitmap = nullptr;
 
 	starCatchEffectSample = nullptr;
 	mainBackgroundThemeSample = nullptr;
@@ -14,9 +17,12 @@ ResourcesManager::ResourcesManager(){
 void ResourcesManager::loadBitmaps(){
 	backgroundBitmap = al_load_bitmap("assets/gfx/background.png");
 	playerSheetBitmap = al_load_bitmap("assets/gfx/playerSheet.png");
-	starBitmap = al_load_bitmap("assets/gfx/star.png");
+	starYellowBitmap = al_load_bitmap("assets/gfx/star.png");
+	starGreenBitmap = al_load_bitmap("assets/gfx/stargreen.png");
+	starBlueBitmap = al_load_bitmap("assets/gfx/starblue.png");
+	starRedBitmap = al_load_bitmap("assets/gfx/starred.png");
 	icon = al_load_bitmap("assets/gfx/star.ico");
-	if(!backgroundBitmap || !playerSheetBitmap || !starBitmap || icon)
+	if(!backgroundBitmap || !playerSheetBitmap || !starYellowBitmap || icon)
 		throw MyException("Could not load bitmap.");
 }
 
@@ -29,9 +35,21 @@ void ResourcesManager::unloadBitmaps(){
 		al_destroy_bitmap(playerSheetBitmap);
 		playerSheetBitmap = nullptr;
 	}
-	if(starBitmap){
-		al_destroy_bitmap(starBitmap);
-		starBitmap = nullptr;
+	if(starYellowBitmap){
+		al_destroy_bitmap(starYellowBitmap);
+		starYellowBitmap = nullptr;
+	}
+	if(starGreenBitmap){
+		al_destroy_bitmap(starGreenBitmap);
+		starGreenBitmap = nullptr;
+	}
+	if(starBlueBitmap){
+		al_destroy_bitmap(starBlueBitmap);
+		starBlueBitmap = nullptr;
+	}
+	if(starRedBitmap){
+		al_destroy_bitmap(starRedBitmap);
+		starRedBitmap = nullptr;
 	}
 }
 
