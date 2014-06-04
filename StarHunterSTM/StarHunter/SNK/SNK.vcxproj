@@ -104,6 +104,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AffectingObject.cpp" />
     <ClCompile Include="AllegroInitializer.cpp" />
     <ClCompile Include="AllegroInputManager.cpp" />
     <ClCompile Include="AllegroStopWatch.cpp" />
@@ -114,23 +115,24 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="hid.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InverseDirectionObject.cpp" />
+    <ClCompile Include="Lock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyException.cpp" />
+    <ClCompile Include="NoAffectObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourcesManager.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpaceBackground.cpp" />
+    <ClCompile Include="SpeedUpObject.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Star.cpp" />
-    <ClCompile Include="StarBlue.cpp" />
-    <ClCompile Include="StarGreen.cpp" />
-    <ClCompile Include="StarRed.cpp" />
-    <ClCompile Include="StarYellow.cpp" />
     <ClCompile Include="STMInputManager.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="TiledSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AffectingObject.h" />
     <ClInclude Include="AllegroInputManager.h" />
     <ClInclude Include="AllegroInitializer.h" />
     <ClInclude Include="AllegroStopWatch.h" />
@@ -142,20 +144,19 @@
     <ClInclude Include="hid.h" />
     <ClInclude Include="IAffecting.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InverseDirectionObject.h" />
+    <ClInclude Include="Lock.h" />
     <ClInclude Include="MyException.h" />
+    <ClInclude Include="NoAffectObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourcesManager.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SpaceBackground.h" />
+    <ClInclude Include="SpeedUpObject.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Star.h" />
-    <ClInclude Include="StarBlue.h" />
-    <ClInclude Include="StarGreen.h" />
-    <ClInclude Include="StarRed.h" />
-    <ClInclude Include="StarYellow.h" />
     <ClInclude Include="STMInputManager.h" />
     <ClInclude Include="StopWatch.h" />
-    <ClInclude Include="TiledSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.res" />

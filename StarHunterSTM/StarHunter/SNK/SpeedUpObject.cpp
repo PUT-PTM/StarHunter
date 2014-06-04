@@ -1,51 +1,22 @@
 #include "SpeedUpObject.h"
 
-SpeedUpObject::SpeedUpObject() : affectingTime(4), endFlag(false)
-{}
-
-SpeedUpObject::~SpeedUpObject()
+void SpeedUpObject::undo(Player* player, bool *done, StopWatch *watch)
 {
-	endFlag = true;
-	while(!mQueue.empty())
-	{
-		ThreadWorker* t = mQueue.front();
-		t->join();
-		mQueue.pop();
-		delete t;	
-	}
-}
-
-SpeedUpObject::ThreadWorker::ThreadWorker()
-{
-	this->done = false;
-}
-
-SpeedUpObject::ThreadWorker::~ThreadWorker()
-{
-	delete this->t;
-}
-
-void SpeedUpObject::ThreadWorker::join()
-{
-	this->t->join();
-}
-
-void SpeedUpObject::undo(Player* player, bool *done)
-{
-	StopWatch watch;
-	watch.restart();
-	while(watch.elapsedSeconds().count() < affectingTime && !endFlag)
+	watch->restart();
+	while(watch->elapsedSeconds().count() < affectingTime && !endFlag)
 	{
 		Sleep(50);
 	}
-	player->multiplyDistancePerFrameBy(0.5f);
+	player->multiplyDistancePerFrameBy(1.0f / 1.6f);
 	*done = true;
 }
 
 void SpeedUpObject::affect(Player* player)
 {
-	player->multiplyDistancePerFrameBy(2.0f);
-	ThreadWorker * worker = new ThreadWorker();
-	worker->t = new std::thread(&SpeedUpObject::undo, this, player, &worker->done);
-	mQueue.push(worker);
+		if(mQueue.size() > 0)
+			mQueue.back()->watch.restart();
+		player->multiplyDistancePerFrameBy(1.6f);
+		ThreadWorker * worker = new ThreadWorker();
+		worker->t = new std::thread(&SpeedUpObject::undo, this, player, &worker->done, &worker->watch);
+		mQueue.push(worker);
 }

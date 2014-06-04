@@ -5,7 +5,9 @@ Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	amountOfRegionsHorizontally(3),
 	amountOfRegionsVertically(4),
 	startingRegionX(0),
-	startingRegionY(1)
+	startingRegionY(1),
+	maximalDistancePerFrame(6.5f),
+	minimalDistancePerFrame(2.5f)
 {
 	this->setWidth(50); // Real player width
 	this->setHeight(60); // Real player height
@@ -18,6 +20,8 @@ Player::Player(float pX, float pY, float displayWidth, float displayHeight) :
 	regionNumberX = startingRegionX;
 	regionNumberY = startingRegionY;
 	tiledSprite = nullptr;
+
+	directionInversed = false;
 }
 
 Player::~Player(){
@@ -79,8 +83,21 @@ void Player::keepInBounds(){
 		0);
 }
 
-void Player::setDistancePerFrame(float pDistance){
-	distance = pDistance;
+void Player::multiplyDistancePerFrameBy(float value)
+{
+	lock.acquire();
+	float newDistance = distance * value;
+	if(newDistance > maximalDistancePerFrame)
+		newDistance = maximalDistancePerFrame;
+	else if(newDistance < minimalDistancePerFrame)
+		newDistance = minimalDistancePerFrame;
+	distance = newDistance;
+	lock.release();
+}
+
+bool Player::isCurrentDistancPerFrameMaximal()
+{
+	return (distance >= maximalDistancePerFrame);
 }
 
 void Player::setPosition(float pX, float pY){
@@ -89,6 +106,8 @@ void Player::setPosition(float pX, float pY){
 }
 
 void Player::changeDirection(InputManager::MoveEventType newDirection){
+	if(directionInversed)
+		inverse(newDirection);
 	if(direction != newDirection){
 		regionNumberY = startingRegionY;
 		if(newDirection != InputManager::MoveEventType::NONE){
@@ -101,6 +120,39 @@ void Player::changeDirection(InputManager::MoveEventType newDirection){
 		}
 		direction = newDirection;
 	}	
+}
+
+void Player::inverse(InputManager::MoveEventType &newDirection)
+{
+		switch(newDirection){
+	case InputManager::MoveEventType::DOWN:
+		newDirection = InputManager::MoveEventType::UP;
+		break;
+	case InputManager::MoveEventType::UP:
+		newDirection = InputManager::MoveEventType::DOWN;
+		break;
+	case InputManager::MoveEventType::RIGHT:
+		newDirection = InputManager::MoveEventType::LEFT;
+		break;
+	case InputManager::MoveEventType::LEFT:
+		newDirection = InputManager::MoveEventType::RIGHT;
+		break;
+	}
+}
+
+void Player::inverseDirections(bool flag)
+{
+	directionInversed = flag;
+}
+
+bool Player::isDirectionsInversed()
+{
+	return directionInversed;
+}
+
+InputManager::MoveEventType Player::getCurrentDirection()
+{
+	return direction;
 }
 
 void Player::animate(){

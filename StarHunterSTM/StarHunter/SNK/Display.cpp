@@ -1,7 +1,9 @@
 #include "Display.h"
 
 Display::Display(int width, int height){
+	al_set_new_display_flags(ALLEGRO_FULLSCREEN);
 	display = al_create_display(width, height);
+	al_hide_mouse_cursor(display);
 	al_set_window_title(display, "StarHunter");
  
     if(!display)

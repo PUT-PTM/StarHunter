@@ -1,29 +1,15 @@
 #pragma once
 
-#include "IAffectingObject.h"
+#include "AffectingObject.h"
 #include "StopWatch.h"
 #include <future>
 #include <queue>
 
-class SpeedUpObject : public IAffectingObject{
+class SpeedUpObject : public AffectingObject{
 private:
-	class ThreadWorker{
-	public:
-		std::thread* t;
-		bool done;
+	void undo(Player* player, bool *done, StopWatch *watch);
 
-		ThreadWorker();
-		~ThreadWorker();
-		void join();
-	};
-	std::queue<ThreadWorker*> mQueue;
-
-	const int affectingTime;
-	void undo(Player* player, bool *done);
-
-	bool endFlag;
 public:
-	SpeedUpObject();
-	~SpeedUpObject();
+
 	void affect(Player* player);
 };

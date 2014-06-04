@@ -5,6 +5,7 @@
 #include "Display.h"
 #include "Entity.h"
 #include "Sprite.h"
+#include "IAffectingObject.h"
 
 class Star : public Entity{
 protected:	
@@ -12,8 +13,9 @@ protected:
 	int usableWidth, usableHeight;
 	float displayWidth, displayHeight;
 	float emptySpaceScale, emptySpaceWidth, emptySpaceHeight;
-
-	void setupParameters();	
+	
+	IAffectingObject *affectingObject;
+	
 	bool validateNewPosition(Entity e);
 public:
 	Star(float pX, float pY, float displayWidth, float displayHeight);
@@ -21,6 +23,9 @@ public:
 	void generateNewPositionBasedOnPlayerPosition(Entity player);
 	void generateNewPosition();
 	void setPosition(float pX, float pY);
-	void attachBitmap(ALLEGRO_BITMAP* starBitmap);
+	void attachSprite(Sprite* starBitmap);
+	void attachEffect(IAffectingObject *affectingObject);
+	void affect(Player *player);
+	void setupParameters();	
 	void draw();
 };

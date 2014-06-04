@@ -2,6 +2,7 @@
 #include <thread>
 #include <iostream>
 #include "hid.h"
+#include <time.h>
 
 #include "InputManager.h"
 #include "GameTimer.h"
@@ -11,12 +12,13 @@
 
 #include "Display.h"
 #include "Player.h"
-#include "StarYellow.h"
-#include "StarGreen.h"
-#include "StarBlue.h"
-#include "StarRed.h"
+#include "Star.h"
 #include "Sound.h"
 #include "Gui.h"
+
+#include "SpeedUpObject.h"
+#include "NoAffectObject.h"
+#include "InverseDirectionObject.h"
 
 
 class Game{
@@ -34,18 +36,20 @@ private:
 	AllegroStopWatch watch;
 	Player player;
 	SpaceBackground background;
-	StarYellow starYellow;
-	StarGreen starGreen;
-	StarBlue starBlue;
-	StarRed starRed;
+	Star star;
 	Sound sound;
 	Gui gui;
 	GameState state;
 
+	Sprite *yellowStar, *blueStar, *redStar;
+
+	SpeedUpObject speedUpEffect;
+	NoAffectObject noEffect;
+	InverseDirectionObject inverseEffect;
+
 	bool end, draw;
 	int score;
-	int change;		
-
+	int change;
 
 	std::thread *drawingAndTimersRelatedLogicThread;
 	std::thread *startInitializingSountThread;
@@ -62,6 +66,11 @@ private:
 	void startDrawingAndTimersRelatedLogic();
 	void stopDrawingAndTimersRelatedLogic();
 	void drawingAndTimersRelatedLogicLoop();
+
+	void changeStar();
+	void changeStarToYellow();
+	void changeStarToBlue();
+	void changeStarToRed();
 public:
 	Game();
 	~Game();

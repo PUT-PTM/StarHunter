@@ -16,7 +16,6 @@ protected:
 	void drawTime();
 public:
 	Gui(float displayWidth, float displayHeight);
-	~Gui();
 	void attachFonts(ALLEGRO_FONT *textFont, ALLEGRO_FONT *bigTextFont);
 	void draw();
 	void drawOnPause();

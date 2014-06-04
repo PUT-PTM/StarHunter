@@ -12,10 +12,6 @@ Gui::Gui(float displayWidth, float displayHeight)
 	setupPositions(displayWidth, displayHeight);
 }
 
-Gui::~Gui(){
-	al_destroy_font(textFont);
-}
-
 void Gui::setupPositions(float displayWidth, float displayHeight){
 	scorePositionX = displayWidth / 50.0f;
 	scorePositionY = displayHeight / 60.0f;

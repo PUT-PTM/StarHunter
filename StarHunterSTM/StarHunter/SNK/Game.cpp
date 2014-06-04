@@ -4,14 +4,11 @@ Game::Game() :
 	display(800, 600),
 	inputManager(display),
 	player(
-		display.getWidth() / 2.0f, display.getHeight() / 2.0f,
-		display.getWidth(), display.getHeight()),
+	display.getWidth() / 2.0f, display.getHeight() / 2.0f,
+	display.getWidth(), display.getHeight()),
 	background(&display),
 	gui(display.getWidth(), display.getHeight()),
-	starYellow(50, 50, display.getWidth(), display.getHeight()),
-	starGreen(100, 100, display.getWidth(), display.getHeight()),
-	starBlue(200, 200, display.getWidth(), display.getHeight()),
-	starRed(300, 300, display.getWidth(), display.getHeight())
+	star(50, 50, display.getWidth(), display.getHeight())
 {
 	drawingAndTimersRelatedLogicThread = nullptr;
 	maxTime = 60;
@@ -23,16 +20,26 @@ Game::Game() :
 	state = NotStarted;
 	gui.setTime(maxTime);
 
+	star.attachEffect(&noEffect);
 
 	startInitializingSound();
 	initializeBitmaps();
 	initializeFonts();
 	setupInput();
+
+	srand(time(NULL));
 }
 
 Game::~Game(){
 	startInitializingSountThread->join();
+
+	delete yellowStar;
+	delete blueStar;
+	delete redStar;
+
 	resourcesManager.unloadSounds();
+	resourcesManager.unloadFonts();
+	resourcesManager.unloadBitmaps();
 }
 
 void Game::initializeBitmaps(){
@@ -41,17 +48,15 @@ void Game::initializeBitmaps(){
 	player.attachBitmap(resourcesManager.playerSheetBitmap);
 	background.attachBitmap(resourcesManager.backgroundBitmap);
 
-	starYellow.attachBitmap(resourcesManager.starYellowBitmap);
-	starGreen.attachBitmap(resourcesManager.starGreenBitmap);
-	starBlue.attachBitmap(resourcesManager.starBlueBitmap);
-	starRed.attachBitmap(resourcesManager.starRedBitmap);
+	yellowStar = new Sprite(resourcesManager.starYellowBitmap);
+	blueStar = new Sprite(resourcesManager.starBlueBitmap);
+	redStar = new Sprite(resourcesManager.starRedBitmap);
 
-	starYellow.generateNewPosition();
-	starYellow.generateNewPositionBasedOnPlayerPosition(player);
-	starGreen.generateNewPosition();
-	
-	starBlue.generateNewPosition();
-	starRed.generateNewPosition();
+	star.attachSprite(yellowStar);
+	star.setupParameters();
+
+	star.generateNewPosition();
+	star.generateNewPositionBasedOnPlayerPosition(player);
 }
 
 void Game::initializeFonts(){
@@ -78,7 +83,7 @@ void Game::setupInput(){
 
 void Game::run(){
 	timer.start();
-	
+
 
 	startDrawingAndTimersRelatedLogic();
 	logicLoop();
@@ -106,7 +111,7 @@ void Game::logicLoop(){
 			end = true;
 		if(state != Paused){
 			player.changeDirection(inputEvent.getLastMove());
-			background.changeDirection(inputEvent.getLastMove());
+			background.changeDirection(player.getCurrentDirection());
 			if(state != NotStarted){
 				int elapsedSeconds = (int)watch.getElapsedSeconds();
 				gui.setTime(maxTime - elapsedSeconds);
@@ -124,8 +129,8 @@ void Game::logicLoop(){
 void Game::drawingAndTimersRelatedLogicLoop(){
 	al_set_target_backbuffer(display.getAllegroDisplay()); // set target in new thread
 	srand(time(NULL));
-	
-	
+
+
 	std::cout << change;
 	while(!end){
 		GameTimer::TimerTickType timerType = timer.getTimerTick();
@@ -136,134 +141,19 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 					background.move();
 					player.move();
 
-					// Nowe gwiazdki, prawdopodobienstwo 2:1:1:1 (star, green, blue, red)
-					if(change == 0 || change == 1)
-						if(player.collidesWith(starYellow))
-				{
-					if(state != Started)
-						startGame();
-					
-					change = (std::rand()% 5 ) + 0;
-
-					switch(change)
+					if(star.collidesWith(player))
 					{
-					case 0:
-					case 1:
-					starYellow.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 2:
-					starGreen.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 3:
-					starBlue.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					default:
-					starRed.generateNewPositionBasedOnPlayerPosition(player);
-					break;
+						if(state == NotStarted)
+							startGame();
+						score++;
+						gui.setScore(score);
+						sound.playStarSoundEffect();
+						star.affect(&player);
+						star.generateNewPositionBasedOnPlayerPosition(player);
+						changeStar();
 					}
-					
-					sound.playStarSoundEffect();
-					//score = starYellow.affect(player, score);
-					
-				};
-				
-						if(change == 2)
-				if(player.collidesWith(starGreen))
-				{
-					
-					if(state != Started)
-						startGame();
-					change = (std::rand()% 5 ) + 0;
-
-					switch(change)
-					{
-					case 0:
-					case 1:
-					starYellow.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 2:
-					starGreen.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 3:
-					starBlue.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					default:
-					starRed.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					}
-					
-					sound.playStarSoundEffect();
-					score--;
-					gui.setScore(score);
-					
-				};
-
-						if(change == 3)
-				if(player.collidesWith(starBlue))
-				{
-					
-					if(state != Started)
-						startGame();
-					change = (std::rand()% 5 ) + 0;
-
-					switch(change)
-					{
-					case 0:
-					case 1:
-					starYellow.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 2:
-					starGreen.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 3:
-					starBlue.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					default:
-					starRed.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					}
-
-					sound.playStarSoundEffect();
-					timer.setAnimation(15);
-					
-				};
-
-
-						if(change == 4)
-				if(player.collidesWith(starRed))
-				{
-					
-					if(state != Started)
-						startGame();
-					change = (std::rand()% 5 ) + 0;
-
-					switch(change)
-					{
-					case 0:
-					case 1:
-					starYellow.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 2:
-					starGreen.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					case 3:
-					starBlue.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					default:
-					starRed.generateNewPositionBasedOnPlayerPosition(player);
-					break;
-					}
-
-					sound.playStarSoundEffect();
-					score += 2;
-					gui.setScore(score);
-					
-				};
-				
-				
-
 				}
-				
+
 				draw = true;
 			}
 			else{													// Animation timer
@@ -274,26 +164,9 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 
 		if(draw){
 			display.clear();
-			
+
 			background.draw();
-
-			switch(change)
-			{
-				case 0:
-				case 1:
-			starYellow.draw();	
-			break;
-				case 2:
-			starGreen.draw();
-			break;
-				case 3:
-			starBlue.draw();
-			break;
-				default:
-			starRed.draw();
-			break;
-			}
-
+			star.draw();
 			player.draw();
 			gui.draw();
 			if(state == Paused)
@@ -301,7 +174,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 
 			display.flip();
 			draw = false;
-			
+
 		}
 	}
 }
@@ -309,7 +182,7 @@ void Game::drawingAndTimersRelatedLogicLoop(){
 void Game::restartGame(){
 	state = NotStarted;
 	score = 0;
-	
+
 	gui.setScore(score);
 	gui.setTime(maxTime);
 	watch.restart();
@@ -322,4 +195,33 @@ void Game::startGame(){
 
 void Game::pauseGame(){
 	state = Paused;
+}
+
+void Game::changeStar()
+{
+	int random = rand() % 11;
+	if(random < 8)
+		changeStarToYellow();
+	else if(random < 10)
+		changeStarToBlue();
+	else
+		changeStarToRed();
+}
+
+void Game::changeStarToYellow()
+{
+	star.attachSprite(yellowStar);
+	star.attachEffect(&noEffect);
+}
+
+void Game::changeStarToBlue()
+{
+	star.attachSprite(blueStar);
+	star.attachEffect(&speedUpEffect);
+}
+
+void Game::changeStarToRed()
+{
+	star.attachSprite(redStar);
+	star.attachEffect(&inverseEffect);
 }

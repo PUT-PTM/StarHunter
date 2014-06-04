@@ -25,11 +25,9 @@ void Star::setupParameters(){
 	usableHeight = displayHeight - getHeight();
 }
 
-void Star::attachBitmap(ALLEGRO_BITMAP* starBitmap){
-	if(sprite)
-		delete sprite;
-	sprite = new Sprite(starBitmap);
-	setupParameters();
+void Star::attachSprite(Sprite* starBitmap){
+	starBitmap->setPosition(this->positionX, this->positionY);
+	sprite = starBitmap;
 }
 
 void Star::generateNewPositionBasedOnPlayerPosition(Entity player){
@@ -60,3 +58,13 @@ void Star::setPosition(float pX, float pY){
 void Star::draw(){
 	sprite->draw();
 };
+
+void Star::attachEffect(IAffectingObject *af)
+{
+	this->affectingObject = af;
+}
+
+void Star::affect(Player* player)
+{
+	affectingObject->affect(player);
+}
